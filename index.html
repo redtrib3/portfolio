@@ -1,0 +1,123 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>RedTribe</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+
+/*Scrollbar styling*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkslategray;	
+  border-radius: 10px;
+}
+
+.brandlogo{
+	font-family: 'Anonymous Pro',monospace; 
+	font-size: 35px;"
+}
+.brandlogo:hover{
+	color: red;
+	font-size: 36px;
+	transition: 1s;
+}
+
+#burger span{
+	background-color: white;
+}
+
+.hero-image {
+  background-color: #c91616;
+  height: 590px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.hero-text h3 {
+	font-family:'Anonymous Pro',monospace;
+	color: navajowhite;
+}
+
+.hero-text h1{
+	font-family: monospace;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.footer{
+	background-color: #b5aeae;
+	
+}
+
+
+
+</style>
+<body>
+
+
+<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+	
+	<div class="navbar-brand" >
+		<a class="navbar-item brandlogo" style="cursor: text;">RedTribe</a>
+	</div>
+
+	<a class="navbar-burger" id="burger">
+	   <span ></span>
+     <span ></span>
+     <span ></span>
+	</a>
+
+	<div id="links_Nav" class="navbar-menu" >
+		<div class="navbar-start">
+			<a href="index.html" class="navbar-item"> Home </a>
+			<a  href="overview.html" class="navbar-item"> Writeups </a>
+			<a href="socials.html" class="navbar-item"> Socials </a>
+		</div>
+
+	</div>	
+</nav>
+
+
+<div class="hero-image">
+  <div class="hero-text">
+  	<p style="font-size:50px;">&lt;	/ &gt;</p>
+    <h1 style="font-size:50px;"> We Are RedTribe</h1>
+    <h3 class="subtitle">Security  |  CTFs  |  Python</h3>
+  </div>
+</div>
+
+	
+
+<script src="js/burgerToggle.js"></script>
+
+</body>
+</html>
+
+
+
+

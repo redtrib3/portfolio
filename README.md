@@ -1,5 +1,5 @@
 ![Screenshot](/images/redtribe-sec.svg)
-# 0xRedTribe 
+# 0xRedTribeSec
 
 
 URL -> https://0xredtribe.github.io

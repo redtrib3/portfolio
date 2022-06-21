@@ -1,137 +1,114 @@
-<!DOCTYPE html> 
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>RedTribe</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--Favicon-->
-	<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-	<link rel="manifest" href="/images/favicon/site.webmanifest">
-	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-	<meta name="msapplication-TileColor" content="#da532c">
-	<meta name="theme-color" content="#ffffff">
+<!DOCTYPE html>
+<html lang="en" class="v-page_home v-none-transition">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+      <title>RedTribe</title>
 
+      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      <meta name="description" content="" />
+      <meta name="keywords" content="" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="format-detection" content="telephone=no" />
+      <!-- Styles -->
+      <link rel="stylesheet" href="/static/css/slick-slick.css" />
+      <link rel="stylesheet" href="/static/css/slick-slick-theme.css" />
+      <link rel="stylesheet" href="/static/css/css-minified-index.css" />
+      <link rel="stylesheet" href="/static/css/built-cssAdditional.css" />
 
-</head>
+   
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
-/*Scrollbar styling*/
+   body{
+      font-family: 'Josefin Sans', sans-serif;
+   }
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
+</style>      
+<script type="text/javascript"> 
+function disableselect(e){  
+return false  
+}  
+
+function reEnable(){  
+return true  
+}  
+
+//if IE4+  
+document.onselectstart=new Function ("return false")  
+document.oncontextmenu=new Function ("return false")  
+//if NS6  
+if (window.sidebar){  
+document.onmousedown=disableselect  
+document.onclick=reEnable  
 }
+</script>
+        
+   </head>
 
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
+   <body class="v-loading" data-v-console="false" data-v-page="home" data-v-tablet="1200" data-v-mobile="980">
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: darkslategray;	
-  border-radius: 10px;
-}
+         <canvas class="page__canvas fullHeight"></canvas>
+      <div class="page-wrap fullHeightMin" id="wrap">
+         <header class="v-header">
+            <div class="wrap">
+               <div style="font-family: monospace;font-size: 1em;" class="v-header__logo"> RedTribe</div>
+            </div>
+         </header>
+         
+         <div class="page__screen fullHeightMin" id="v-ajaxPage__outer">
+            
+            <div class="default home fullHeightMin">
+               <div class="home__text v-text_opacity">
 
-.brandlogo{
-	font-family: 'Anonymous Pro',monospace; 
-	font-size: 35px;"
-}
-	
-.brandlogo:hover{
-	color: red;
-	font-size: 36px;
-	transition: 1s;
-}
+                  <p>
+                     Hi there! <br/>
+                     I'm Anirudh <br/>
+                  </p>
 
-#burger span{
-	background-color: white;
-}
+               </div>
+               <div class="home__telephone v-text_opacity">
+                  <a  class="line"></a>
+               </div>
 
-.hero-image {
-  background-color: #c91616;
-  height: 700px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
+               <ul class="home__list">
+                  
+                  
+                  <li>
+                     <a href="#" style="font-family: 'Anonymous Pro',monospace;" data-color="rgba(0, 119, 181, .5)" target="_blank"><span>Writeups</span></a>
+                  </li>
+                  
+                  <li>
+                     <a href="#" style="font-family: 'Anonymous Pro',monospace;" data-color="rgba(66, 239, 74, 0.5)" target="_blank"><span>Socials</span></a>
+                  </li>
 
+               </ul>
 
-.hero-text h3 {
-	font-family:'Anonymous Pro',monospace;
-	color: navajowhite;
-}
+               <div class="home__developing v-text_opacity">
+                  <p>
+                      <br />
+                  </p>
+               </div>
 
-.hero-text h1{
-	font-family: monospace;
-}
-
-	
-.hero-text {
-  text-align: center;
-  position: absolute;
-  font-family: monospace;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-
-.footer{
-	background-color: #b5aeae;
-	
-}
-
-.linkitem{
-	font-family:"Rajdhani",sans-serif;
-}
-
-</style>
-<body>
-
-
-<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
-	
-	<div class="navbar-brand" >
-		<a class="navbar-item brandlogo" style="cursor: text;">RedTribe</a>
-	</div>
-
-	<a class="navbar-burger" id="burger">
-	   <span ></span>
-     <span ></span>
-     <span ></span>
-	</a>
-
-	<div id="links_Nav" class="navbar-menu" >
-		<div class="navbar-start">
-			<a href="index.html" class="navbar-item linkitem"> Home </a>
-			<a  href="/static/overview.html" class="navbar-item linkitem"> Writeups </a>
-			<a href="/static/socials.html" class="navbar-item linkitem"> Socials </a>
-		</div>
-
-	</div>	
-</nav>
-
-
-<div class="hero-image">
-  <div class="hero-text">
-  	<p style="font-size:50px;">&lt;	/ &gt;</p>
-    <h1 style="font-size:50px;"> We Are RedTribe</h1>
-    <h3 class="subtitle">Security  |  CTFs  |  Python</h3>
-  </div>
-</div>
-
-
-
-<script src="/static/js/burgerToggle.js"></script>
-
-</body>
+               <div class="home__see">
+                  <a class="line" >Tryhackme</a> <br />
+                  <a class="line" >Hackerrank</a>
+               </div>
+               
+               
+               <div class="home__email">
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Preloader -->
+      <div id="v-preloader" class="v-preloader v-preloader__item"></div>
+      <!-- Scripts -->
+      <script src="/static/js/js-jquery.js"></script>
+      <script src="/static/js/js-scrollbar.js"></script>
+      <script src="/static/js/slick-slick.js"></script>
+      <script src="/static/js/min-built.js"></script>
+   </body>
 </html>
-

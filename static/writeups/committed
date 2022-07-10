@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Committed Writeup | TryHackMe </title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+
+.brandlogo{
+	font-family: 'Anonymous Pro',monospace; 
+	font-size: 35px;"
+}
+.brandlogo:hover{
+	color: red;
+	font-size: 36px;
+	transition: 1s;
+}
+
+#burger span{
+	background-color: white;
+}
+.para{
+	padding: 20px;
+	margin: 10px;
+}
+
+pre {
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+img{
+	margin: 10px;
+	padding: 10px;
+
+}
+
+p{
+	color: black;
+}
+.notification{
+	border: 0.5px solid lightgray;
+	border-radius: 15px;
+}
+
+/*Scrollbar styling*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkslategray;	
+  border-radius: 10px;
+}
+
+code{
+	color: green;
+}
+</style>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+	
+	<div class="navbar-brand">
+		<a class="navbar-item brandlogo" style="cursor: text;">RedTrib3</a>
+	</div>
+
+	<a class="navbar-burger" id="burger">
+	  <span ></span>
+      <span ></span>
+      <span ></span>
+	</a>
+
+	<div id="links_Nav" class="navbar-menu" >
+		<div class="navbar-start">
+			<a href="/index.html" class="navbar-item"> Home </a>
+			<a href="/static/overview.html" class="navbar-item"> Writeups </a>
+			<a href="/static/socials.html" class="navbar-item"> Socials </a>
+		</div>
+
+	</div>	
+</nav>
+
+
+
+<!-- Hero card/Title holder -->
+
+<section class="hero is-link">
+	<div style="margin: 10px;padding: 20px;"  class="container">
+
+		<h1 class="title" style="font-family:monospace">
+			<!--is-success = easy, is-warning=medium, is-danger=hard --->
+			<span class="tag is-success is-small ">Difficulty: Easy</span><br>
+			Committed
+		</h1>
+		<h2 class="subtitle is-italic is-size-6">@anii0101 | 1 min read</h2>
+
+	</div>
+</section>
+
+<!---BreadCrumbs-->
+<nav class="breadcrumb is-centered " style="padding-left:15px;"  >
+  <ul>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/static/overview.html">Writeups</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Committed</a></li>
+  </ul>
+</nav>	
+
+
+
+<!--Start of Containers--->
+
+	<div class="container para">
+		<div class="notification">
+		<h1 class="title is-size-3 has-text-dark ">👋 Introduction</h1><br>	
+	Hi there!, 
+	Committed is a room in <a href="https://tryhackme.com/room/committed">TryHackme</a> Rated as Easy. Its actually quite simple
+	if you have used git before. Without Further Ado lets Start! <br><br>
+	
+	<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->
+	</div>
+		
+	</div>
+	
+	<div class="container para" id="more">
+		<div class="notification">
+			<h2 class="title">🔍 Enumeration </h2><br>
+			
+			Honestly, there isn't much to enumerate here as the files we need to are stored in the attack box.<br>
+			So Deploy the machine and Press the <i>'Show split screen'</i> button in the top right corner.<br><br>
+
+		</div>
+	</div>	
+
+	<div class="container para" id="more">
+		<div class="notification">
+			
+			As the TryHackMe room says there is a ZIP file in <b>/home/ubuntu/commited</b> directory. unzipping it,<br>
+			we are give two files - <code>commited.py and README.md</code>. This looks to be git folder since it has <br>
+			.git directory.<br><br>
+
+			<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->
+
+			The Python file:<br>
+
+			<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->
+
+			This appears to be a script to connect to Mysql. but we are not given the credentials. 
+
+		<h1 class="subtitle"><b><u>Checking GIT branches:</u></b></h1><br><br>
+
+			If you don't know yet, here is a good blog post explaining <a href="https://www.toolsqa.com/git/branch-in-git/"> what git branches</a> are.
+
+			We can list for all git branches using the command:<br><br><code>git branch -a</code><br><br>
+			where '-a' is used to list local and remote branches.
+
+		<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->
+
+		This returns two Branches. master branch and dbint branch The one branch marked with star symbol(*) is where we are at.<br><br>
+
+		<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->		
+		
+		We can check for all the Commit history with the command:<br><br><code>git log </code><br><br>
+		This returns all the Commit logs for the current Branch.<br><br>
+
+		<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->
+
+		We can check for each Commit with the command: <br><br><code>git show &lt;hash-value&gt;</code><br><br>
+
+		The first branch doesn't give us any Real output. and nothing seems suspicious.Lets move on <br>
+		to the second branch.<br><br>
+
+		<code>git log dbint</code><br><br>
+
+		<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->
+
+		We can see one Odd commit straight away commented as  'oops'. That might mean the commit contains a mistake<br> done by the developer. Lets check it out.
+
+		<!--<img src="/images/annie/header.JPG"><br><br> CHANGE THIS!!-->
+
+		We staight away sees the flag. That means this writeup is over. :) <br><br>
+		BYE<br>
+
+
+
+		</div>
+	</div>	
+
+
+<!-- footer section -->
+<footer class="footer">
+	<div class="content has-text-centered">
+		
+		<p class="brandlogo" style="font-size: 20px;color: gray;">RedTribe</p>
+              <img src="https://hits.sh/github.com/0xRedTribe/0xRedTribe.github.io.svg?style=flat-square&label=VIEWS&extraCount=10&color=007ec6&labelColor=0c0b0b&logo=Tryhackme">
+		<div class="footer-links ">
+			<a class="button is-text"> MIT License </a>
+			<a class="button is-text"> Support</a>	
+		</div><br>
+		
+		<div>
+			<p class="has-text-grey">&copy; 2021  | All rights reserved</p>
+		</div>
+	</div>
+</footer>
+
+
+<!--BurgerScript-->
+<script src="/static/js/burgerToggle.js"></script>
+
+</body>
+</html>

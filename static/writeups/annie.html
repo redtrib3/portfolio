@@ -135,7 +135,7 @@ code{
 	Annie is a room in <a href="https://tryhackme.com/room/annie">TryHackme</a> Rated as Medium. I found it to be easy.
 	Without Further Ado lets Start! <br><br>
 	
-	<img src="/images/annie/header.JPG"><br><br>
+	<img src="/portfolio/images/annie/header.JPG"><br><br>
 	</div>
 		
 	</div>
@@ -167,7 +167,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 		from searching "AnyDesk Exploits" in Google, we get a RCE exploit for <b>AnyDesk 5.5.2</b>, we really doesn't know yet if 
 		the box has the vulnerable version. But sometimes it is better to just try it.<br>
 
-		<img src="/images/annie/exploitimage.JPG"> <br><br>
+		<img src="/portfolio/images/annie/exploitimage.JPG"> <br><br>
 
 
 		We need to Modify the script in order for it to work, Generate another shellcode using msfvenom (with our THM-ip)
@@ -178,7 +178,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 		<h3 class="subtitle has-text-weight-bold is-size-3"> <u> Exploiting AnyDesk: </u> </h3>
 		<p>
-			<img src="/images/annie/Exploited.png"><br><br>
+			<img src="/portfolio/images/annie/Exploited.png"><br><br>
 		</p>
 		Setup a NETCAT listener on the port you set on the MSFVENOM. Execute the python script and wait for the connection.<br>
 		If the Reverse shell doesn't drop within 2-3 minutes. Reset the machine and try again. (I got it right the second time.)
@@ -188,7 +188,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 		 <p>
 				 	When you search for SUID files, you find an interesting file as the first result.<br><br>
 				 	
-				 	<img src=/images/annie/suid.png><br><br> <!--change this !!-->
+				 	<img src=/portfolio/images/annie/suid.png><br><br> <!--change this !!-->
 
 				 	Setcap is a linux binary which can be used to Give <a href="https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities">capabilities</a> to a another binary. 
 				 	According to the Linux <a href="https://linux.die.net/man/8/setcap">man page</a>:<br><br>
@@ -207,7 +207,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 		 </p>
 	
-	<img src="/images/annie/rooted.JPG"><br><br>
+	<img src="/portfolio/images/annie/rooted.JPG"><br><br>
 
 </div>
 </div>	
@@ -232,7 +232,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 
 <!--BurgerScript-->
-<script src="/static/js/burgerToggle.js"></script>
+<script src="/portfolio/static/js/burgerToggle.js"></script>
 
 </body>
 </html>

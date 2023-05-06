@@ -1,7 +1,6 @@
 ![Screenshot](/images/redtribe-sec.svg)
-# 0xRedTribeSec
+# redtrib3
 
-
-URL -> https://0xredtribe.github.io \
+URL -> https://0xredtribe.github.io/portfolio 
 website to Post my CTF writeups from TryHackMe and HackTheBox.
 

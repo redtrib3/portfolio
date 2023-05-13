@@ -15,11 +15,7 @@
 	font-family: 'Anonymous Pro',monospace; 
 	font-size: 35px;"
 }
-.brandlogo:hover{
-	color: red;
-	font-size: 36px;
-	transition: 1s;
-}
+
 
 #burger span{
 	background-color: white;
@@ -71,6 +67,10 @@ p{
 code{
 	color: green;
 }
+
+.linkitem{
+font-family: monospace, sans-serif;	
+}
 </style>
 
 <body>
@@ -79,7 +79,7 @@ code{
 <nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
 	
 	<div class="navbar-brand">
-		<a class="navbar-item brandlogo" style="cursor: text;">RedTribe</a>
+		<a class="navbar-item brandlogo" style="cursor: text;">redtribe</a>
 	</div>
 
 	<a class="navbar-burger" id="burger">
@@ -92,6 +92,7 @@ code{
 		<div class="navbar-start">
 			<a href="/portfolio/static/index.html" class="navbar-item"> Home </a>
 			<a href="/portfolio/static/overview.html" class="navbar-item"> Writeups </a>
+			<a href="/portfolio/static/challenges.html" class="navbar-item linkitem"> Challenges </a>
 			<a href="/portfolio/static/socials.html" class="navbar-item"> Socials </a>
 		</div>
 
@@ -223,10 +224,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 			<a class="button is-text"> MIT License </a>
 			<a class="button is-text"> Support</a>	
 		</div><br>
-		
-		<div>
-			<p class="has-text-grey">&copy; 2021  | All rights reserved</p>
-		</div>
+
 	</div>
 </footer>
 

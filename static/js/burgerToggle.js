@@ -11,4 +11,3 @@ burgerIcon.addEventListener('click',() => {
  	navlinks.classList.toggle('is-active');   // Brings the Dropdown 
 })
 
-//EOF

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Challenges | redtrib3</title>
+	<!--BulmaCSS-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--Favicon-->
+	<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/images/favicon/site.webmanifest">
+	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<!--FontAwesome-->
+	<script src="https://kit.fontawesome.com/9cae3ad966.js" crossorigin="anonymous"></script>
+
+</head>
+
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
+
+.brandlogo{
+	font-family: 'Anonymous Pro',monospace; 
+	font-size: 35px;
+	
+}
+
+/*.brandlogo:hover{
+	font-size: 36px;
+	transition: 1s;
+}*/
+
+#burger span{
+	background-color: white;
+}
+
+
+
+.linkitem{
+font-family:monospace, sans-serif;	
+}
+	
+
+.container
+{
+    font-family: 'Lato', sans-serif;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkslategray;	
+  border-radius: 10px;
+}
+
+
+#notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  transition: opacity 0.5s ease-in-out;
+  font-family:monospace, sans-serif;
+}
+
+
+
+
+
+</style>
+
+<body>  
+<!-- Navigation Bar -->
+<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+	
+	<div class="navbar-brand">
+		<a class="navbar-item brandlogo" style="cursor: text;">redtrib3</a>
+	</div>
+
+	<a class="navbar-burger" id="burger">
+	  <span ></span>
+      <span ></span>
+      <span ></span>
+	</a>
+
+	<div id="links_Nav" class="navbar-menu" >
+		<div class="navbar-start">
+			<a href="/portfolio/index.html" class="navbar-item linkitem"> Home </a>
+			<a href="/portfolio/static/overview.html" class="navbar-item linkitem"> Writeups </a>
+			<a href="#challenges-add" class="navbar-item linkitem"> Challenges </a>
+			<a href="/portfolio/static/socials.html" class="navbar-item linkitem"> Socials </a>
+		</div>
+
+	</div>	
+</nav>
+
+<section class="hero is-success ">
+	<div class="hero-body">
+		<p class="title" style="font-family: monospace;font-size: 40px;">
+			Challenges
+		</p>
+		<p class="subtitle">
+			A Collection of CTF/coding challenges created by me.
+		</p> 	
+	</div>
+</section>
+
+
+<!---BreadCrumbs-->
+<nav class="breadcrumb is-centered is-medium" style="padding-left:15px;"  >
+  <ul>
+    <li><a href="/portfolio/index.html">Home</a></li>
+    <li class="is-active" ><a href="#">challenges</a></li>
+  </ul>
+</nav>	
+
+
+
+ <!--Accordion Challenges containers Start-->   
+
+<!--Accordion tab--->
+<a class="accordion" onclick="toggleAccordion('hidden-challenge-1')" >
+    <div class="container is-fluid" style="margin:20px">
+        <div class="notification is-dark ">
+            <p id="challenge-header-1330"><b>Challenge :</b> eazyCipher </p>
+        </div>
+    </div> 
+</a>
+
+<!--accordion body--->
+<div class="container is-fluid" id="hidden-challenge-1"  style="margin:20px;display:none;border-left:10px solid;">
+    <div class="notification">
+    
+        <span class="tag is-success is-medium"> Basic</span><br><br>
+        <b>Description:</b> Perhaps wearing glasses would be 85x more helpful. <br><br> 
+        <pre class="highlight"><code> pOlpGbhai9Wfo8eoPZZtBcugfwozx9RCGFmSA5EqovtOowNUs0O40J5S2AlkSTE8CmLyhpMJEej </code></pre><br><br>
+       
+    <!--input box--> 
+    <div style="margin:20px;">
+        <div class="field is-grouped">
+        
+          <div class="control is-expanded has-icons-left">
+            <input class="input is-success" id="flag-input-1330" type="text" placeholder="rctf{ ... }">
+            <span class="icon is-small is-left">
+                <i class="fas fa-flag" ></i>
+            </span>
+          </div>
+          
+          <div class="control">
+            <button class="button is-success" id="flag-btn-1330" onclick="submitflag('1330')" >Submit Flag</button>
+          </div>
+        </div>
+    </div>
+
+
+    </div>
+</div>
+
+
+<!--Accordion tab--->
+<a class="accordion" onclick="toggleAccordion('hidden-challenge-2')" >
+    <div class="container is-fluid" style="margin:20px">
+        <div class="notification is-dark ">
+            <p id="challenge-header-1331"><b>Challenge:</b> Commitment issues</p>
+        </div>
+    </div> 
+</a>
+
+<!--accordion body--->
+<div class="container is-fluid" id="hidden-challenge-2" style="margin:20px;display:none;border-left:10px solid;">
+
+    <div class="notification">
+    <button class="button is-info is-small" style="position: absolute; top: 10px; right: 10px;margin:10px;" id="download-1331" onclick="downloadFile('evilcorp.zip')">Download Task files</button>
+    <span class="tag is-warning is-medium">Mid</span><br><br>
+        <b>Description:</b><br>
+        You're a Pentester at Hackevil Solutions and has been tasked with leading a black box pentest for the company. During your reconnaissance phase, you discovered a potential vulnerability that led you to a zip file. Can you find the secrets of the universe?  <br><br>Don't forget to Download the Task files!      
+
+
+
+        
+    <!--input box--> 
+    <div style="margin:20px;">
+        <div class="field is-grouped">
+        
+          <div class="control is-expanded has-icons-left">
+            <input class="input is-success" id="flag-input-1331" type="text" placeholder="rctf{ ... }">
+            <span class="icon is-small is-left">
+                <i class="fas fa-flag" ></i>
+            </span>
+          </div>
+          
+          <div class="control">
+            <button class="button is-success" id="flag-btn-1331" onclick="submitflag('1331')">Submit Flag</button>
+          </div>
+          
+
+        </div>
+    </div>  
+
+
+    </div>
+</div>
+
+<div id="notification" class="notification is-hidden">
+  <button class="delete"></button>
+  <p id="notif-msg"></p>
+</div>
+
+
+<!--accordion challenge containers end-->
+
+<!--footer-->
+<footer class="footer">
+	<div class="content has-text-centered">
+		<p class="brandlogo" style="font-size: 30px;color: dimgrey;">  RedTrib3 </p>
+		<div class="footer-links ">
+			<a href="/LICENSE" class="button is-text"> MIT License </a>
+			<a class="button is-text"> Support</a>	
+		</div><br>
+
+
+	</div>
+</footer>
+
+
+
+<script>
+addEventListener("DOMContentLoaded",function(){Array.from(document.getElementsByTagName("input")).forEach(function(e){e.type==="text"&&(e.value="")})});
+</script>
+<script src="js/burgerToggle.js"></script>
+<script src="js/accordion.js" ></script>
+<script src="js/submit.js"></script>
+
+
+</body>
+</html>
+

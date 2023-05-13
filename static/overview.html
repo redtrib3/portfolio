@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Writeups | RedTrib3</title>
+	<title>Writeups | redtrib3</title>
 	<!--BulmaCSS-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,17 +19,13 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
 
 .brandlogo{
 	font-family: 'Anonymous Pro',monospace; 
 	font-size: 35px;"
 }
-.brandlogo:hover{
-	color: red;
-	font-size: 36px;
-	transition: 1s;
-}
+
 
 #burger span{
 	background-color: white;
@@ -39,6 +35,10 @@
 	background-color: #ebe9e6;
 	cursor: pointer;
 	transform: 1s;
+}
+
+.linkitem{
+font-family: monospace, sans-serif;	
 }
 
 /*Scrollbar styling*/
@@ -60,9 +60,7 @@
   border-radius: 10px;
 }
 
-.linkitem{
-font-family:'Rajdhani', sans-serif;	
-}
+
 	
 </style>
 
@@ -72,7 +70,7 @@ font-family:'Rajdhani', sans-serif;
 <nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
 	
 	<div class="navbar-brand">
-		<a class="navbar-item brandlogo" style="cursor: text;">RedTrib3</a>
+		<a class="navbar-item brandlogo" style="cursor: text;">redtrib3</a>
 	</div>
 
 	<a class="navbar-burger" id="burger">
@@ -85,6 +83,7 @@ font-family:'Rajdhani', sans-serif;
 		<div class="navbar-start">
 			<a href="/portfolio/index.html" class="navbar-item linkitem"> Home </a>
 			<a href="/portfolio/static/overview.html" class="navbar-item linkitem"> Writeups </a>
+			<a href="/portfolio/static/challenges.html" class="navbar-item linkitem"> Challenges </a>
 			<a href="/portfolio/static/socials.html" class="navbar-item linkitem"> Socials </a>
 		</div>
 
@@ -118,7 +117,7 @@ font-family:'Rajdhani', sans-serif;
 		<div class="card" style="border-radius: 20px;">
 			<div class="card-content">
 				<a href="/portfolio/static/writeups/jeff.html">
-				   <p class="title is-3">Jeff</a>
+				   <p class="title is-3">Jeff</p>
 				   <p class="subtitle is-6">TryHackMe</p>
 				</a>
 			</div>
@@ -165,7 +164,6 @@ font-family:'Rajdhani', sans-serif;
 			<div class="content"  style="margin:15px">
 				<p class="is-italic">
 					One of our developers accidentally committed some sensitive code to our GitHub repository.
-					Well, at least, that is what they told us...
 				</p>
 				<br>
 			</div>
@@ -195,7 +193,7 @@ font-family:'Rajdhani', sans-serif;
 		<div class="card" style="border-radius: 20px;">
 			<div class="card-content">
 				<a href="/portfolio/static/writeups/capture.html">
-				   <p class="title is-3">Capture!</a>
+				   <p class="title is-3">Capture!</p>
 				   <p class="subtitle is-6">TryHackMe</p>
 				</a>
 			</div>
@@ -220,9 +218,6 @@ font-family:'Rajdhani', sans-serif;
 			<a class="button is-text"> Support</a>	
 		</div><br>
 
-		<div>
-			<p class="has-text-grey">&copy; No rights reserved ;) </p>
-		</div>
 	</div>
 </footer>
 

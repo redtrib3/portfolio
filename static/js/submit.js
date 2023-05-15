@@ -94,9 +94,9 @@ function submitflag(challengeId)
     
 }
 
-function downloadFile(filename)
+function downloadFile(filename,challengeId)
 {
-    downloadbtn = document.getElementById("download-1331");
+    downloadbtn = document.getElementById(`download-${challengeId}`);
     downloadbtn.classList.add("is-loading")
     
     fetch(`https://flagsubredtrib3-1-b5762800.deta.app/download/${filename}`)

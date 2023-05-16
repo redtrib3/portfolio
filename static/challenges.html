@@ -258,6 +258,50 @@ font-family:monospace, sans-serif;
     </div>
 </div>
 
+
+<!--Accordion tab--->
+<a class="accordion" onclick="toggleAccordion('hidden-challenge-4')" >
+    <div class="container is-fluid" style="margin:20px">
+        <div class="notification is-dark ">
+            <p id="challenge-header-1333"><b>Challenge :</b>Go Take a Walk! </p>
+        </div>
+    </div> 
+</a>
+
+<!--accordion body--->
+<div class="container is-fluid" id="hidden-challenge-4" style="margin:20px;display:none;border-left:10px solid;">
+
+    <div class="notification">
+    <button class="button is-info is-small" id="download-1333" style="position: absolute; top: 10px; right: 10px;margin:10px;" onclick="downloadFile('gotakeawalk.jpg',1333)">Download Task files</button>
+    <span class="tag is-danger is-medium">Hard</span><br><br>
+        <b>Type : </b>Forensics<br><br>
+        <b>Description:</b><br>
+         Walking is a simple yet effective way to improve your health. Not only is it a great form of low-impact exercise that can prevent witches from <i>hexing</i> you, but it can also make you touch grass. Go ahead, Take a walk!
+         
+    <!--input box--> 
+    <div style="margin:20px;">
+        <div class="field is-grouped">
+        
+          <div class="control is-expanded has-icons-left">
+            <input class="input is-success" id="flag-input-1333" type="text" placeholder="rctf{ ... }">
+            <span class="icon is-small is-left">
+                <i class="fas fa-flag" ></i>
+            </span>
+          </div>
+          
+          <div class="control">
+            <button class="button is-success" id="flag-btn-1333" onclick="submitflag('1333')">Submit Flag</button>
+          </div>
+          
+
+        </div>
+    </div>  
+
+
+    </div>
+</div>
+
+
 <div id="notification" class="notification is-hidden">
   <button class="delete"></button>
   <p id="notif-msg"></p>

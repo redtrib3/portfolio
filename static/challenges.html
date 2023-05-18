@@ -345,6 +345,52 @@ font-family:monospace, sans-serif;
     </div>
 </div>
 
+<!--Accordion tab--->
+<a class="accordion" onclick="toggleAccordion('hidden-challenge-6')" >
+    <div class="container is-fluid" style="margin:20px">
+        <div class="notification is-dark ">
+            <p id="challenge-header-1334"><b>[ Reversing ] :</b> Ceaser's secrets </p>
+        </div>
+    </div> 
+</a>
+
+
+<!--accordion body--->
+<div class="container is-fluid" id="hidden-challenge-6" style="margin:20px;display:none;border-left:10px solid;">
+
+    <div class="notification">
+    <button class="button is-info is-small" id="download-1335" style="position: absolute; top: 10px; right: 10px;margin:10px;" onclick="downloadFile('enc.py',1335)">Download Task files</button>
+    <span class="tag is-success is-medium">Mid</span><br><br>
+       
+        <b>Description:</b><br>
+        <p>
+        Alright, pay attention. So, my buddy Ceaser bursts into the room, all hyped up, and starts blabbering about how he's come up with the most secure encryption algorithm ever. I mean, who has the time or the expertise to dive into that stuff, right? But here's where you come in. need you, my friend, I really do.  
+        </p><br>
+        
+        I managed to get his encryption algorithm. I overheard him say that it doesn't encrypt Numbers and special characters except brackets. Break it for me!
+        
+    <!--input box--> 
+    <div style="margin:20px;">
+        <div class="field is-grouped">
+        
+          <div class="control is-expanded has-icons-left">
+            <input class="input is-success" id="flag-input-1335" type="text" placeholder="rctf{ ... }">
+            <span class="icon is-small is-left">
+                <i class="fas fa-flag" ></i>
+            </span>
+          </div>
+          
+          <div class="control">
+            <button class="button is-success" id="flag-btn-1335" onclick="submitflag('1335')">Submit Flag</button>
+          </div>
+          
+
+        </div>
+    </div>  
+
+
+    </div>
+</div>
 
 
 <div id="notification" class="notification is-hidden">

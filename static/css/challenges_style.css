@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap');
+
+.brandlogo{
+	font-family: 'Anonymous Pro',monospace; 
+	font-size: 35px;
+	
+}
+
+/*.brandlogo:hover{
+	font-size: 36px;
+	transition: 1s;
+}*/
+
+#burger span{
+	background-color: white;
+}
+
+
+
+.linkitem{
+font-family:monospace, sans-serif;	
+}
+	
+
+.container
+{
+    font-family: 'Lato', sans-serif;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkslategray;	
+  border-radius: 10px;
+}
+
+
+#notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  transition: opacity 0.5s ease-in-out;
+  font-family:monospace, sans-serif;
+}
+

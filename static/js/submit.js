@@ -29,7 +29,7 @@ function submitflag(challengeId)
     
     thisbutton.classList.add("is-loading");
     
-    const ids = {"1330":false,"1331":false,"1332":false,"1333":false, "1334":false, "1335":false};
+    const ids = Object.fromEntries(Array.from({ length: 7 }, (_, i) => [`${1330 + i}`, false]));
     localStorage.setItem("ids",JSON.stringify(ids)); 
     
     let responseJson;

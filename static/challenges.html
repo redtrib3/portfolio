@@ -392,6 +392,51 @@ font-family:monospace, sans-serif;
     </div>
 </div>
 
+<!--Accordion tab--->
+<a class="accordion" onclick="toggleAccordion('hidden-challenge-6')" >
+    <div class="container is-fluid" style="margin:20px">
+        <div class="notification is-dark ">
+            <p id="challenge-header-1334"><b>[ Miscellaneous ] :</b> Interception: I </p>
+        </div>
+    </div> 
+</a>
+
+
+<!--accordion body--->
+<div class="container is-fluid" id="hidden-challenge-7" style="margin:20px;display:none;border-left:10px solid;">
+
+    <div class="notification">
+    <button class="button is-info is-small" id="download-1336" style="position: absolute; top: 10px; right: 10px;margin:10px;" onclick="downloadFile('interception.zip',1336)">Download Task files</button>
+    <span class="tag is-success is-medium">Basic</span><br><br>
+       
+        <b>Description:</b><br>
+        <p>
+        Intelligence has discovered that insurgents are using VoIP softphones to communicate. Our spy, Bob, has intercepted one of the leader's calls. This could potentially lead to uncovering their next attack. Find out what the insurgents are planning.
+        </p><br>
+        
+    <!--input box--> 
+    <div style="margin:20px;">
+        <div class="field is-grouped">
+        
+          <div class="control is-expanded has-icons-left">
+            <input class="input is-success" id="flag-input-1336" type="text" placeholder="rctf{ ... }">
+            <span class="icon is-small is-left">
+                <i class="fas fa-flag" ></i>
+            </span>
+          </div>
+          
+          <div class="control">
+            <button class="button is-success" id="flag-btn-1336" onclick="submitflag('1336')">Submit Flag</button>
+          </div>
+          
+
+        </div>
+    </div>  
+
+
+    </div>
+</div>
+
 
 <div id="notification" class="notification is-hidden">
   <button class="delete"></button>

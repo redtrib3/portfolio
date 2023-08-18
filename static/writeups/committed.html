@@ -15,9 +15,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-	<link rel="apple-touch-icon" sizes="120x120" href="/portfolio/images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/portfolio/images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/portfolio/images/favicon/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
 	<link rel="manifest" href="/images/favicon/site.webmanifest">
 	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
@@ -107,10 +107,10 @@ font-family: monospace, sans-serif;
 
 	<div id="links_Nav" class="navbar-menu" >
 		<div class="navbar-start">
-			<a href="/portfolio/static/overview.html" class="navbar-item linkitem"> Writeups </a>
+			<a href="/static/overview.html" class="navbar-item linkitem"> Writeups </a>
 			<a href="/challenges" class="navbar-item linkitem"> Challenges </a>
-			<a href="/portfolio/projects.html" class="navbar-item linkitem"> Projects </a>
-			<a href="/portfolio/static/socials.html" class="navbar-item linkitem"> Socials </a>
+			<a href="/projects.html" class="navbar-item linkitem"> Projects </a>
+			<a href="/static/socials.html" class="navbar-item linkitem"> Socials </a>
 		</div>
 
 	</div>	
@@ -135,8 +135,8 @@ font-family: monospace, sans-serif;
 <!---BreadCrumbs-->
 <nav class="breadcrumb is-centered " style="padding-left:15px;"  >
   <ul>
-    <li><a href="/portfolio/index.html">Home</a></li>
-    <li><a href="/portfolio/static/overview.html">Writeups</a></li>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/static/overview.html">Writeups</a></li>
     <li class="is-active"><a href="#" aria-current="page">Committed</a></li>
   </ul>
 </nav>	
@@ -152,7 +152,7 @@ font-family: monospace, sans-serif;
 	Committed is a room created by <a href="https://tryhackme.com/p/cmnatic">Cmnatic</a> in <a href="https://tryhackme.com/room/committed">TryHackme</a> Rated as Easy . Its actually quite simple
 	if you have used git before. Without Further Ado lets Start! <br><br>
 	
-	<img src="/portfolio/images/committed/Commit_Banner.JPG"><br><br>
+	<img src="/images/committed/Commit_Banner.JPG"><br><br>
 	</div>
 		
 	</div>
@@ -174,11 +174,11 @@ font-family: monospace, sans-serif;
 			we are give two files - <code>commited.py and README.md</code>. This looks to be git folder since it has <br>
 			.git directory.<br><br>
 
-			<img src="/portfolio/images/committed/unzipped_sc1.png"><br><br>
+			<img src="/images/committed/unzipped_sc1.png"><br><br>
 
 			The Python file:<br><br>
 
-			<img src="/portfolio/images/committed/code_sc5.png"><br><br>
+			<img src="/images/committed/code_sc5.png"><br><br>
 
 			This appears to be a script to connect to Mysql. but we are not given the credentials. <br><br>
 
@@ -188,7 +188,7 @@ font-family: monospace, sans-serif;
 			We can list for all git branches using the command:<br><br><code>git branch -a</code><br><br>
 			where '-a' is used to list local and remote branches.<br><br>
 
-		<img src="/portfolio/images/committed/branches_sc2.png"><br><br>
+		<img src="/images/committed/branches_sc2.png"><br><br>
 
 		This returns two Branches. master branch and "dbint" branch. The one branch marked with star symbol(*) is where we are at.<br><br>
 		
@@ -204,12 +204,12 @@ font-family: monospace, sans-serif;
 
 		<code>git log dbint</code><br><br>
 
-		<img src="/portfolio/images/committed/gitlog_sc3.png"><br><br>
+		<img src="/images/committed/gitlog_sc3.png"><br><br>
 
 		We can see one Odd commit straight away commented as  'oops'. That might mean the commit contains a mistake 
 		done by the developer. Lets check it out.<br><br>
 
-		<img src="/portfolio/images/committed/code_sc5_edit.png"><br><br>
+		<img src="/images/committed/code_sc5_edit.png"><br><br>
 
 		We staight away sees the flag. That means this writeup is over :P <br><br>
 		BYE<br>
@@ -239,7 +239,7 @@ font-family: monospace, sans-serif;
 
 
 <!--BurgerScript-->
-<script src="/portfolio/static/js/burgerToggle.js"></script>
+<script src="/static/js/burgerToggle.js"></script>
 
 </body>
 </html>

@@ -15,9 +15,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-	<link rel="apple-touch-icon" sizes="120x120" href="/portfolio/images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/portfolio/images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/portfolio/images/favicon/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
 	<link rel="manifest" href="/images/favicon/site.webmanifest">
 	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
@@ -107,10 +107,10 @@ font-family: monospace, sans-serif;
 
 	<div id="links_Nav" class="navbar-menu" >
 		<div class="navbar-start">
-			<a href="/portfolio/static/overview.html" class="navbar-item linkitem"> Writeups </a>
+			<a href="/static/overview.html" class="navbar-item linkitem"> Writeups </a>
 			<a href="/challenges" class="navbar-item linkitem"> Challenges </a>
-			<a href="/portfolio/projects.html" class="navbar-item linkitem"> Projects </a>
-			<a href="/portfolio/static/socials.html" class="navbar-item linkitem"> Socials </a>
+			<a href="/projects.html" class="navbar-item linkitem"> Projects </a>
+			<a href="/static/socials.html" class="navbar-item linkitem"> Socials </a>
 		</div>
 
 	</div>	
@@ -135,8 +135,8 @@ font-family: monospace, sans-serif;
 <!---BreadCrumbs-->
 <nav class="breadcrumb is-centered " style="padding-left:15px;"  >
   <ul>
-    <li><a href="/portfolio/index.html">Home</a></li>
-    <li><a href="/portfolio/static/overview.html">Writeups</a></li>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/static/overview.html">Writeups</a></li>
     <li class="is-active"><a href="#" aria-current="page">Jeff</a></li>
   </ul>
 </nav>	
@@ -174,7 +174,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 		As the Hint says . Add <code>jeff.thm</code> to your /etc/hosts file. 
 
-		<img src="/portfolio/images/ph1.png">
+		<img src="/images/ph1.png">
 		<br>
 		Nothing here Stands Out and the robots.txt is not found.
 		So lets move on and do a directory Bruteforce.<br><br>
@@ -208,7 +208,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 				 	 -D = dictionary attack mode<br>
 				 	 -p = wordlist filepath <br><br>
 				 	 It cracked the password within milliseconds.<br><br>
-				 	 <img src="/portfolio/images/ph2.PNG" ><br>
+				 	 <img src="/images/ph2.PNG" ><br>
 
 				 	 Unzipping the Zip file with the password , we can see it has webroot files. <br>
 				 	 Checking the 'wpadmin.bak' file , we see it contains wordpress password of some user.<br>
@@ -336,7 +336,7 @@ ftp.quit()
 
 					set the PORT and IP addr in the reverse shell and execute the above script from victim machine. 
 					and setup a nc listener and wait for connection. <br><br>
-					<img src="/portfolio/images/ph4.PNG"><br>
+					<img src="/images/ph4.PNG"><br>
 					Got connection as backupmgr.<br><br>
 
 					<h2 class="title"> Privilage Escalation  (Horizontal) </h2>
@@ -430,7 +430,7 @@ User jeff may run the following commands on tryharder:
 
 
 <!--BurgerScript-->
-<script src="/portfolio/static/js/burgerToggle.js"></script>
+<script src="/static/js/burgerToggle.js"></script>
 
 </body>
 </html>

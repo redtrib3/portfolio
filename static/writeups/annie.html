@@ -15,9 +15,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Favicon-->
-	<link rel="apple-touch-icon" sizes="120x120" href="/portfolio/images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/portfolio/images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/portfolio/images/favicon/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
 	<link rel="manifest" href="/images/favicon/site.webmanifest">
 	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
@@ -107,10 +107,10 @@ font-family: monospace, sans-serif;
 
 	<div id="links_Nav" class="navbar-menu" >
 		<div class="navbar-start">
-			<a href="/portfolio/static/overview.html" class="navbar-item linkitem"> Writeups </a>
+			<a href="/static/overview.html" class="navbar-item linkitem"> Writeups </a>
 			<a href="/challenges" class="navbar-item linkitem"> Challenges </a>
-			<a href="/portfolio/projects.html" class="navbar-item linkitem"> Projects </a>
-			<a href="/portfolio/static/socials.html" class="navbar-item linkitem"> Socials </a>
+			<a href="/projects.html" class="navbar-item linkitem"> Projects </a>
+			<a href="/static/socials.html" class="navbar-item linkitem"> Socials </a>
 		</div>
 
 	</div>	
@@ -136,8 +136,8 @@ font-family: monospace, sans-serif;
 <!---BreadCrumbs-->
 <nav class="breadcrumb is-centered " style="padding-left:15px;"  >
   <ul>
-    <li><a href="/portfolio/index.html">Home</a></li>
-    <li><a href="/portfolio/static/overview.html">Writeups</a></li>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/static/overview.html">Writeups</a></li>
     <li class="is-active"><a href="#" aria-current="page">Annie</a></li>
   </ul>
 </nav>	
@@ -153,7 +153,7 @@ font-family: monospace, sans-serif;
 	Annie is a room in <a href="https://tryhackme.com/room/annie">TryHackme</a> Rated as Medium. I found it to be easy.
 	Without Further Ado lets Start! <br><br>
 	
-	<img src="/portfolio/images/annie/header.JPG"><br><br>
+	<img src="/images/annie/header.JPG"><br><br>
 	</div>
 		
 	</div>
@@ -185,7 +185,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 		from searching "AnyDesk Exploits" in Google, we get a RCE exploit for <b>AnyDesk 5.5.2</b>, we really doesn't know yet if 
 		the box has the vulnerable version. But sometimes it is better to just try it.<br>
 
-		<img src="/portfolio/images/annie/exploitimage.JPG"> <br><br>
+		<img src="/images/annie/exploitimage.JPG"> <br><br>
 
 
 		We need to Modify the script in order for it to work, Generate another shellcode using msfvenom (with our THM-ip)
@@ -196,7 +196,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 		<h3 class="subtitle has-text-weight-bold is-size-3"> <u> Exploiting AnyDesk: </u> </h3>
 		<p>
-			<img src="/portfolio/images/annie/Exploited.png"><br><br>
+			<img src="/images/annie/Exploited.png"><br><br>
 		</p>
 		Setup a NETCAT listener on the port you set on the MSFVENOM. Execute the python script and wait for the connection.<br>
 		If the Reverse shell doesn't drop within 2-3 minutes. Reset the machine and try again. (I got it right the second time.)
@@ -206,7 +206,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 		 <p>
 				 	When you search for SUID files, you find an interesting file as the first result.<br><br>
 				 	
-				 	<img src=/portfolio/images/annie/suid.png><br><br> <!--change this !!-->
+				 	<img src=/images/annie/suid.png><br><br> <!--change this !!-->
 
 				 	Setcap is a linux binary which can be used to Give <a href="https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities">capabilities</a> to a another binary. 
 				 	According to the Linux <a href="https://linux.die.net/man/8/setcap">man page</a>:<br><br>
@@ -225,7 +225,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 		 </p>
 	
-	<img src="/portfolio/images/annie/rooted.JPG"><br><br>
+	<img src="/images/annie/rooted.JPG"><br><br>
 
 </div>
 </div>	
@@ -247,7 +247,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 
 <!--BurgerScript-->
-<script src="/portfolio/static/js/burgerToggle.js"></script>
+<script src="/static/js/burgerToggle.js"></script>
 
 </body>
 </html>

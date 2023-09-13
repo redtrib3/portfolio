@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-29DVLEW6Q7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-29DVLEW6Q7');
+    </script>
+    
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="static/css/katex.css">
+      <script type="application/javascript" src="static/js/mermaid.min.js"></script><script type="application/javascript" src="static/js/mermaid_render.js"></script>
+      <link rel="stylesheet" href="static/css/atom-one-light.css">
+      <title>PatriotCTF Writeup</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/images/favicon/site.webmanifest">
+  	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+  
+   </head>
+<!-- Navigation Bar -->
+<nav class="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+	
+	<div class="navbar-brand">
+		<a class="navbar-item brandlogo" href="/" >redtrib3</a>
+	</div>
+
+	<a class="navbar-burger" id="burger">
+	  <span ></span>
+     	  <span ></span>
+      	  <span ></span>
+	</a>
+
+	<div id="links_Nav" class="navbar-menu" >
+		<div class="navbar-start">
+			<a href="/static/overview.html" class="navbar-item linkitem"> Writeups </a>
+			<a href="//challenges.redtrib3.me" class="navbar-item linkitem"> Challenges </a>
+			<a href="/projects.html" class="navbar-item linkitem"> Projects </a>
+			<a href="/static/socials.html" class="navbar-item linkitem"> Socials </a>
+		</div>
+
+	</div>	
+</nav>
+
+    <div id="whole-body-wrapper" style="margin:20px">
+      <div class="exported-note">
+         <div class="exported-note-title">PatriotCTF Writeup</div>
+         <style>
+         @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&display=swap');
+
+        .brandlogo{
+        	font-family: 'Anonymous Pro',monospace; 
+        	font-size: 35px;"
+        }
+        .linkitem{
+            font-family: monospace, sans-serif;	
+         }
+
+        
+        #burger span{
+        	background-color: white;
+        }
+            /* https://necolas.github.io/normalize.css/ */
+            html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+            article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}
+            pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}
+            b,strong{font-weight:bolder}small{font-size:80%}img{border-style:none}
+            body {
+            font-size: 15px;
+            color: #32373F;
+            word-wrap: break-word;
+            line-height: 1.6em;
+            background-color: #ffffff;
+            font-family: 'Avenir', 'Arial', sans-serif;
+            padding-bottom: 0px;
+            padding-top: 0px;
+            }
+            kbd {
+            border: 1px solid rgb(220, 220, 220);
+            box-shadow: inset 0 -1px 0 rgb(220, 220, 220);
+            padding: 2px 4px;
+            border-radius: 3px;
+            background-color: rgb(243, 243, 243);
+            }
+            ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+            }
+            ::-webkit-scrollbar-corner {
+            background: none;
+            }
+            ::-webkit-scrollbar-track {
+            border: none;
+            }
+            ::-webkit-scrollbar-thumb {
+            background: rgba(100, 100, 100, 0.3); 
+            border-radius: 5px;
+            }
+            ::-webkit-scrollbar-track:hover {
+            background: rgba(0, 0, 0, 0.1); 
+            }
+            ::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 100, 100, 0.7); 
+            }
+            /* Remove top padding and margin from first child so that top of rendered text is aligned to top of text editor text */
+            #rendered-md > h1:first-child,
+            #rendered-md > h2:first-child,
+            #rendered-md > h3:first-child,
+            #rendered-md > h4:first-child,
+            #rendered-md > ul:first-child,
+            #rendered-md > ol:first-child,
+            #rendered-md > table:first-child,
+            #rendered-md > blockquote:first-child,
+            #rendered-md > img:first-child,
+            #rendered-md > p:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            }
+            p, h1, h2, h3, h4, h5, h6, ul, table {
+            margin-top: .6em;
+            margin-bottom: 1.35em;
+            /*
+            Adds support for RTL text in the note body. It automatically detects the direction using the content.
+            Issue: https://github.com/laurent22/joplin/issues/3991
+            */
+            unicode-bidi: plaintext;
+            }
+            h1, h2, h3, h4, h5, h6, ul, table {
+            margin-bottom: 0.65em;
+            }
+            h1, h2, h3, h4, h5, h6 {
+            line-height: 1.5em;
+            }
+            h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+            border-bottom: 1px solid #dddddd;
+            padding-bottom: .3em;
+            }
+            h2 {
+            font-size: 1.3em;
+            font-weight: bold;
+            padding-bottom: .1em; */
+            }
+            h3 {
+            font-size: 1.1em;
+            font-weight: bold;
+            }
+            h4, h5, h6 {
+            font-size: 1em;
+            font-weight: bold;
+            }
+            .exported-note-title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 0.8em;
+            line-height: 1.5em;
+            padding-bottom: .35em;
+            border-bottom: 1px solid #dddddd;
+            }
+            a {
+            color: #155BDA;
+            }
+            ul, ol {
+            padding-left: 0;
+            margin-left: 1.7em;
+            }
+            li {
+            margin-bottom: .4em;
+            }
+            li p {
+            margin-top: 0.2em;
+            margin-bottom: 0;
+            }
+            .resource-icon {
+            display: inline-block;
+            position: relative;
+            top: 0.3em;
+            text-decoration: none;
+            width: 1.2em;
+            height: 1.4em;
+            margin-right: 0.4em;
+            background-color:  #155BDA;
+            }
+            /* These icons are obtained from the wonderful ForkAwesome project by copying the src svgs 
+            * into the css classes below.
+            * svgs are obtained from https://github.com/ForkAwesome/Fork-Awesome/tree/master/src/icons/svg
+            * instead of the svg width, height property you must use a viewbox here, 0 0 1536 1792 is typically the actual size of the icon
+            * each line begins with the pre-amble -webkit-mask: url("data:image/svg+xml;utf8,
+            * and of course finishes with ");
+            * to precvent artifacts it is also necessary to include -webkit-mask-repeat: no-repeat;
+            * on the following line
+            * */
+            .fa-joplin {
+            /* Awesome Font file */
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M373.834 128C168.227 128 0 296.223 0 501.834v788.336C0 1495.778 168.227 1664 373.834 1664h788.336c205.608 0 373.83-168.222 373.83-373.83V501.834C1536 296.224 1367.778 128 1162.17 128zm397.222 205.431h417.424a7.132 7.132 0 0 1 7.132 7.133v132.552c0 4.461-3.619 8.073-8.077 8.073h-57.23c-24.168 0-43.768 19.338-44.284 43.374v2.377h-.017v136.191h-.053l-.466 509.375c-5.02 77.667-39.222 149.056-96.324 201.046-60.28 54.834-141.948 85.017-229.962 85.017-12.45 0-25.208-.61-37.907-1.785-92.157-8.682-181.494-48.601-251.662-112.438-71.99-65.517-117.147-150.03-127.164-238-11.226-98.763 23.42-192.783 95.045-257.937 81.99-74.637 198.185-101.768 316.613-75.704 5.574 1.227 9.55 6.282 9.55 11.997v199.52c-.199 2.625-1.481 6.599-8.183 2.896-.663-.365-1.194-.511-1.653-.531-21.987-10.587-45.159-17.57-68.559-19.916-.38-.04-.757-.124-1.138-.163-.537-.048-1.034-.033-1.556-.075-4.13-.354-8.183-.517-12.203-.58-.87-.011-1.771-.127-2.641-.127-.486 0-.951.05-1.437.057-1.464.011-2.886.115-4.33.163-2.76.102-5.497.211-8.182.448-.273.024-.547.07-.835.097-25.509 2.4-47.864 11.104-65.012 25.47-.954.802-1.974 1.53-2.9 2.36a1.34 1.34 0 0 1-.168.146c-23.96 21.8-34.881 53.872-30.726 90.316 4.62 40.737 26.94 81.156 62.841 113.823 35.908 32.67 80.335 52.977 125.113 57.186 35.118 3.36 66.547-3.919 89.899-20.461a97.255 97.255 0 0 0 9.365-7.501c2.925-2.661 5.569-5.5 8.086-8.416.3-.348.672-.673.975-1.024 8.253-9.864 14.222-21.067 17.996-33.148.639-2.034 1.051-4.148 1.564-6.227.381-1.563.81-3.106 1.112-4.693.555-2.784.923-5.632 1.253-8.49.086-.709.183-1.414.237-2.128.492-4.893.693-9.858.55-14.91h.013V521.623c-2.01-22.626-20.78-40.434-43.928-40.434h-57.23a8.071 8.071 0 0 1-8.077-8.073V340.564a7.132 7.132 0 0 1 7.136-7.133z'/>
+            </svg>
+            ");
+            }
+            .fa-file-image {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-128-448v320H256v-192l192-192 128 128 384-384zm-832-192c-106 0-192-86-192-192s86-192 192-192 192 86 192 192-86 192-192 192z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-pdf {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-514-593c25 20 53 38 84 56 42-5 81-7 117-7 67 0 152 8 177 49 7 10 13 28 2 52-1 1-2 3-3 4v1c-3 18-18 38-71 38-64 0-161-29-245-73-139 15-285 46-392 83-103 176-182 262-242 262-10 0-19-2-28-7l-24-12c-3-1-4-3-6-5-5-5-9-16-6-36 10-46 64-123 188-188 8-5 18-2 23 6 1 1 2 3 2 4 31-51 67-116 107-197 45-90 80-178 104-262-32-109-42-221-24-287 7-25 22-40 42-40h22c15 0 27 5 35 15 12 14 15 36 9 68-1 3-2 6-4 8 1 3 1 5 1 8v30c-1 63-2 123-14 192 35 105 87 190 146 238zm-576 411c30-14 73-57 137-158-75 58-122 124-137 158zm398-920c-10 28-10 76-2 132 3-16 5-31 7-44 2-17 5-31 7-43 1-3 2-5 4-8-1-1-1-3-2-5-1-18-7-29-13-36 0 2-1 3-1 4zm-124 661c88-35 186-63 284-81-10-8-20-15-29-23-49-43-93-103-127-176-19 61-47 126-83 197-15 28-30 56-45 83zm646-16c-5-5-31-24-140-24 49 18 94 28 124 28 9 0 14 0 18-1 0-1-1-2-2-3z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-word {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM233 768v107h70l164 661h159l128-485c5-15 8-30 10-46 1-8 2-16 2-24h4l3 24c3 14 4 30 9 46l128 485h159l164-661h70V768h-300v107h90l-99 438c-4 16-6 33-7 46l-2 21h-4c0-6-2-14-3-21-3-13-5-30-9-46L825 768H711l-144 545c-4 16-5 33-8 46l-4 21h-4l-2-21c-1-13-3-30-7-46l-99-438h90V768H233z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-powerpoint {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-992-234v106h327v-106h-93v-167h137c43 0 82-2 118-15 90-31 146-124 146-233s-54-193-137-228c-38-15-84-19-130-19H416v107h92v555h-92zm353-280H650V882h120c35 0 62 6 83 18 36 21 56 62 56 115 0 56-20 99-62 120-21 10-47 15-78 15z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-excel {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-979-234v106h281v-106h-75l103-161c12-19 18-34 21-34h2c1 4 3 7 5 10 4 8 10 14 17 24l107 161h-76v106h291v-106h-68l-192-273 195-282h67V768H828v107h74l-103 159c-12 19-21 34-21 33h-2c-1-4-3-7-5-10-4-7-9-14-17-23L648 875h76V768H434v107h68l189 272-194 283h-68z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-audio {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM620 850c12 5 20 17 20 30v544c0 13-8 25-20 30-4 1-8 2-12 2-8 0-16-3-23-9l-166-167H288c-18 0-32-14-32-32v-192c0-18 14-32 32-32h131l166-167c10-9 23-12 35-7zm417 689c19 0 37-8 50-24 83-102 129-231 129-363s-46-261-129-363c-22-28-63-32-90-10-28 23-32 63-9 91 65 80 100 178 100 282s-35 202-100 282c-23 28-19 68 9 90 12 10 26 15 40 15zm-211-148c17 0 34-7 47-20 56-60 87-137 87-219s-31-159-87-219c-24-26-65-27-91-3-25 24-27 65-2 91 33 36 52 82 52 131s-19 95-52 131c-25 26-23 67 2 91 13 11 29 17 44 17z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-video {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM768 768c70 0 128 58 128 128v384c0 70-58 128-128 128H384c-70 0-128-58-128-128V896c0-70 58-128 128-128h384zm492 2c12 5 20 17 20 30v576c0 13-8 25-20 30-4 1-8 2-12 2-8 0-17-3-23-9l-265-266v-90l265-266c6-6 15-9 23-9 4 0 8 1 12 2z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-archive {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M640 384V256H512v128h128zm128 128V384H640v128h128zM640 640V512H512v128h128zm128 128V640H640v128h128zm700-388c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H768v128H640V128H128v1536h1280zM781 943c85 287 107 349 107 349 5 17 8 34 8 52 0 111-108 192-256 192s-256-81-256-192c0-18 3-35 8-52 0 0 21-62 120-396V768h128v128h79c29 0 54 19 62 47zm-141 465c71 0 128-29 128-64s-57-64-128-64-128 29-128 64 57 64 128 64z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-code {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM480 768c11-14 31-17 45-6l51 38c14 11 17 31 6 45l-182 243 182 243c11 14 8 34-6 45l-51 38c-14 11-34 8-45-6l-226-301c-8-11-8-27 0-38zm802 301c8 11 8 27 0 38l-226 301c-11 14-31 17-45 6l-51-38c-14-11-17-31-6-45l182-243-182-243c-11-14-8-34 6-45l51-38c14-11 34-8 45 6zm-620 461c-18-3-29-20-26-37l138-831c3-18 20-29 37-26l63 10c18 3 29 20 26 37l-138 831c-3 18-20 29-37 26z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file-alt, .fa-file-csv {
+            /* fork-awesome doesn't have csv so we use the text icon */
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM384 800c0-18 14-32 32-32h704c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64zm736 224c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704zm0 256c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            .fa-file {
+            -webkit-mask: url("data:image/svg+xml;utf8,
+            <svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'>
+               <path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280z'/>
+            </svg>
+            ");
+            -webkit-mask-repeat: no-repeat;
+            }
+            blockquote {
+            border-left: 4px solid rgb(220, 220, 220);
+            padding-left: 1.2em;
+            margin-left: 0;
+            opacity: 0.7;
+            }
+            .jop-tinymce table,
+            table {
+            text-align: left;
+            border-collapse: collapse;
+            border: 1px solid rgb(220, 220, 220);
+            background-color: #ffffff;
+            }
+            .jop-tinymce table td, .jop-tinymce table th,
+            table td, th {
+            text-align: left;
+            padding: .5em 1em .5em 1em;
+            font-size: 15;
+            color: #32373F;
+            font-family: 'Avenir', 'Arial', sans-serif;
+            }
+            .jop-tinymce table td,
+            table td {
+            border: 1px solid rgb(220, 220, 220);
+            }
+            .jop-tinymce table th,
+            table th {
+            border: 1px solid rgb(220, 220, 220);
+            border-bottom: 2px solid rgb(220, 220, 220);
+            background-color: rgb(247, 247, 247);
+            }
+            .jop-tinymce table tr:nth-child(even),
+            table tr:nth-child(even) {
+            background-color: rgb(247, 247, 247);
+            }
+            .jop-tinymce table tr:hover,
+            table tr:hover {
+            background-color: #e5e5e5;
+            }
+            hr {
+            border: none;
+            border-bottom: 2px solid #dddddd;
+            }
+            img {
+            max-width: 100%;
+            height: auto;
+            }
+            .inline-code,
+            .mce-content-body code {
+            border: 1px solid rgb(220, 220, 220);
+            background-color: rgb(243, 243, 243);
+            padding-right: .2em;
+            padding-left: .2em;
+            border-radius: .25em;
+            color: rgb(0,0,0);
+            font-size: .9em;
+            }
+            .highlighted-keyword {
+            background-color: #F3B717;
+            color: black;
+            }
+            .not-loaded-resource img {
+            width: 1.15em;
+            height: 1.15em;
+            background: white;
+            padding: 2px !important;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px #000000aa;
+            }
+            a.not-loaded-resource img {
+            margin-right: .2em;
+            }
+            a.not-loaded-resource {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            }
+            .md-checkbox input[type=checkbox]:checked {
+            opacity: 0.7;
+            }
+            .jop-tinymce ul.joplin-checklist .checked,
+            .md-checkbox .checkbox-label-checked {
+            opacity: 0.5;
+            }
+            .exported-note {
+            padding: 1em;
+            }
+            .joplin-editable .joplin-source {
+            display: none;
+            }
+            mark {
+            background: #F7D26E;
+            color: black;
+            }
+            /* =============================================== */
+            /* For TinyMCE */
+            /* =============================================== */
+            .mce-content-body {
+            /* Note: we give a bit more padding at the bottom, to allow scrolling past the end of the document */
+            padding: 5px 10px 10em 0;
+            }
+            /*
+            .mce-content-body code {
+            background-color: transparent;
+            }
+            */
+            .mce-content-body [data-mce-selected=inline-boundary] {
+            background-color: transparent;
+            }
+            .mce-content-body .joplin-editable {
+            cursor: pointer !important;
+            }
+            .mce-content-body.mce-content-readonly {
+            opacity: 0.5;
+            }
+            /* We need that to make sure click events have the A has a target */
+            .katex a span {
+            pointer-events: none;
+            }
+            .media-player {
+            width: 100%;
+            margin-top: 10px;
+            }
+            .media-player.media-pdf {
+            min-height: 35rem;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0;
+            border: 0;
+            display: block;
+            }
+            /* Clear the CODE style if the element is within a joplin-editable block */
+            .mce-content-body .joplin-editable code {
+            border: none;
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+            }
+            /* To make code blocks horizontally scrollable */
+            /* https://github.com/laurent22/joplin/issues/5740 */
+            pre.hljs {
+            overflow-x: auto;
+            }
+            /* =============================================== */
+            /* For TinyMCE */
+            /* =============================================== */
+            @media print {
+            body {
+            height: auto !important;
+            }
+            pre {
+            white-space: pre-wrap;
+            }
+            .code, .inline-code {
+            border: 1px solid #CBCBCB;
+            }
+            #joplin-container-content {
+            /* The height of the content is set dynamically by JavaScript (in updateBodyHeight) to go
+            around various issues related to scrolling. However when printing we don't want this
+            fixed size as that would crop the content. So we set it to auto here. "important" is
+            needed to override the style set by JavaScript at the element-level. */
+            height: auto !important;
+            }
+            }
+            /*
+            FOR THE MARKDOWN EDITOR
+            */
+            /* Remove the indentation from the checkboxes at the root of the document
+            (otherwise they are too far right), but keep it for their children to allow
+            nested lists. Make sure this value matches the UL margin. */
+            li.md-checkbox {
+            list-style-type: none;
+            }
+            li.md-checkbox input[type=checkbox] {
+            margin-left: -1.71em;
+            margin-right: 0.7em;
+            }
+            ul.joplin-checklist {
+            list-style:none;
+            }
+            /*
+            FOR THE RICH TEXT EDITOR
+            */
+            ul.joplin-checklist li::before {
+            content:"\f14a";
+            font-family:"Font Awesome 5 Free";
+            background-size: 16px 16px;
+            pointer-events: all;
+            cursor: pointer;
+            width: 1em;
+            height: 1em;
+            margin-left: -1.3em;
+            position: absolute;
+            color: #32373F;
+            }
+            .joplin-checklist li:not(.checked)::before {
+            content:"\f0c8";
+            }
+            .mermaid { background-color: white; width: 640px; }
+            .mermaid-export-graph { visibility: hidden; } 
+            .joplin-editable:hover .mermaid-export-graph { visibility: visible; }
+            .mermaid-export-graph:hover { background-color: #CBDAF1 !important; }
+         </style>
+         <div id="rendered-md">
+            <h1 id="patriotctf-writeup">Table of Contents </h1>
+            <p>Below is the Patriot CTF write-up for the challenges I could solve.</p>
+            <ol>
+<li><a data-from-md title='#pwn' href='#unlock-pwn'>Pwn</a></li>
+<li><a data-from-md title='#forensics' href='#mag-forensics'>Forensic</a></li>
+<li><a data-from-md title='#web' href='#globe_with_meridians-web'>Web</a></li>
+<li><a data-from-md title='#osint' href='#link-osint'>OSINT</a></li>
+<li><a data-from-md title='#misc' href='#bulbmisc'>Miscellaneous</a></li>
+<li><a data-from-md title='#trivia' href='#nerd_face-trivia'>Trivia</a></li>
+</ol>
+            <h1 id="unlock-pwn">🔓 Pwn </h1>
+            <h2 id="1-guessing-game">1. Guessing game</h2>
+            <p>&quot;<em>No one seems to be able to guess my favorite animal... Can you?</em>&quot;</p>
+            <p>Connecting to provided socket, we are prompted with a message that asks:<br>
+               <code class="inline-code">Hello there, friend! Can you guess my favorite animal? </code>
+            </p>
+            <p>Typing in a random animal like Tiger, we get the reply:<br>
+               <code class="inline-code">That's not my favorite animal... I promise!</code>
+            </p>
+            <p>My first step was to check for strings in the proviede binary, we see the Name &quot;Giraffe&quot;, but doesnt work. I didn't see anything useful, so i moved on with Ghidra.</p>
+            <p>Ghidra functions:</p>
+            <ul>
+               <li>Main()</li>
+               <li>check()</li>
+               <li>outputFlag()</li>
+            </ul>
+            <p><strong>main():</strong></p>
+            <div class="joplin-editable">
+               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">undefined8 main(void)
+
+{
+  puts(&quot;Hello there, friend! Can you guess my favorite animal?&quot;);
+  check();
+  return 0;
+}
+</pre>
+               <pre class="hljs"><code><span class="hljs-function">undefined8 <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+
+</span>{
+  <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Hello there, friend! Can you guess my favorite animal?&quot;</span>);
+  <span class="hljs-built_in">check</span>();
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+            </div>
+            <p><strong>check():</strong></p>
+            <div class="joplin-editable">
+               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">void check(void)
+
+{
+  int iVar1;
+  undefined8 local_140;
+  char local_138 [300];
+  int local_c;
+  
+  
+  local_140 = 0x65666661726947;
+  local_c = 0;
+  printf(&quot;Input guess: &quot;);
+  gets(local_138);
+  iVar1 = strcmp(local_138,(char *)&amp;local_140);
+  if (iVar1 == 0) {
+    puts(&quot;That\'s not my favorite animal... I promise!&quot;);
+  }
+  else {
+    puts(&quot;ERRR! Wrong!&quot;);
+  }
+  if (local_c != 0) {
+    puts(&quot;I wasn\'t able to trick you...&quot;);
+    outputFlag();
+  }
+  return;
+}
+</pre>
+               <pre class="hljs"><code><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+
+</span>{
+  <span class="hljs-type">int</span> iVar1;
+  undefined8 local_140;
+  <span class="hljs-type">char</span> local_138 [<span class="hljs-number">300</span>];
+  <span class="hljs-type">int</span> local_c;
+  
+  
+  local_140 = <span class="hljs-number">0x65666661726947</span>;
+  local_c = <span class="hljs-number">0</span>;
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Input guess: &quot;</span>);
+  <span class="hljs-built_in">gets</span>(local_138);
+  iVar1 = <span class="hljs-built_in">strcmp</span>(local_138,(<span class="hljs-type">char</span> *)&amp;local_140);
+  <span class="hljs-keyword">if</span> (iVar1 == <span class="hljs-number">0</span>) {
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;That\&#x27;s not my favorite animal... I promise!&quot;</span>);
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;ERRR! Wrong!&quot;</span>);
+  }
+  <span class="hljs-keyword">if</span> (local_c != <span class="hljs-number">0</span>) {
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;I wasn\&#x27;t able to trick you...&quot;</span>);
+    <span class="hljs-built_in">outputFlag</span>();
+  }
+  <span class="hljs-keyword">return</span>;
+}
+</code></pre>
+            </div>
+            <p><strong>OutputFlag()</strong></p>
+            <div class="joplin-editable">
+               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">void outputFlag(void)
+
+{
+  char local_38 [40];
+  FILE *local_10;
+  
+  local_10 = fopen(&quot;flag.txt&quot;,&quot;r&quot;);
+  if (local_10 == (FILE *)0x0) {
+    printf(&quot;Unable to find flag.txt :(&quot;);
+  }
+  else {
+    fgets(local_38,0x23,local_10);
+    printf(&quot;%s&quot;,local_38);
+  }
+  fclose(local_10);
+  return;
+}
+</pre>
+               <pre class="hljs"><code><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">outputFlag</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+
+</span>{
+  <span class="hljs-type">char</span> local_38 [<span class="hljs-number">40</span>];
+  FILE *local_10;
+  
+  local_10 = <span class="hljs-built_in">fopen</span>(<span class="hljs-string">&quot;flag.txt&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>);
+  <span class="hljs-keyword">if</span> (local_10 == (FILE *)<span class="hljs-number">0x0</span>) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Unable to find flag.txt :(&quot;</span>);
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">fgets</span>(local_38,<span class="hljs-number">0x23</span>,local_10);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,local_38);
+  }
+  <span class="hljs-built_in">fclose</span>(local_10);
+  <span class="hljs-keyword">return</span>;
+}
+</code></pre>
+            </div>
+            <p>From this code we can clearly see the Usage of <code class="inline-code">gets()</code> in check().<br>
+               The variable local_138 of buffer 300 is being passed onto gets().
+            </p>
+            <p>As a PWN noob, my first intusion was to try to overflow the buffer, so i did:<br>
+               <code class="inline-code">print('A'*301)</code>
+            </p>
+            <p>And we got the flag!</p>
+            <h1 id="mag-forensics">🔍 Forensics</h1>
+            <h2 id="2-capybara">2. Capybara</h2>
+            <p><em>What a cute picture of a capybara!</em></p>
+            <p>Since it was a forensic chal, i went ahead and checked the exifdata, but found nothing useful. Tried cracking stego pass, but failed.</p>
+            <p>And tried to look for hidden files using binwalk and we get:</p>
+            <div class="joplin-editable">
+               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             JPEG image data, JFIF standard 1.01
+151174        0x24E86         Zip archive data, at least v2.0 to extract, compressed size: 6902, uncompressed size: 919160, name: audio.wav
+158170        0x269DA         End of Zip archive, footer length: 22
+</pre>
+               <pre class="hljs"><code><span class="hljs-section">DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------</span>
+0             0x0             JPEG image data, JFIF standard 1.01
+151174        0x24E86         Zip archive data, at least v2.0 to extract, compressed size: 6902, uncompressed size: 919160, name: audio.wav
+158170        0x269DA         End of Zip archive, footer length: 22
+</code></pre>
+            </div>
+            <p>So i extract it with:<br>
+               <code class="inline-code"> binwalk -e capybara.jpeg</code>
+            </p>
+            <p>And we get a audio.wav file which was just a long audio of morse code.<br>
+               Decoded it with a Online voice to text <a data-from-md title='https://morsecode.world/international/decoder/audio-decoder-adaptive.html' href='https://morsecode.world/international/decoder/audio-decoder-adaptive.html'>morse decoder</a>.
+            </p>
+            <p>And got the Hexadecimal Output which on decode got the flag:<br>
+               <code class="inline-code">PCTF{d0_y0U_kN0W_h0W_t0_R34D_m0r53_C0d3?}</code>
+            </p>
+            <h1 id="globe_with_meridians-web">🌐 Web</h1>
+            <h2 id="3-scavenger-hunt">3. Scavenger Hunt</h2>
+            <p><em>Can you find all the hidden pieces of the flag?</em></p>
+            <p><strong>(1/5)</strong> PCTF{Hunt - Given on index.html<br>
+               <strong>(2/5)</strong> 3r5_4n - source code of index.html<br>
+               <strong>(3/5)</strong> D_g4tH3 - robots.txt<br>
+               <strong>(4/5)</strong> R5_e49 - js code<br>
+               <strong>(5/5)</strong> e4a541} - cookies
+            </p>
+            <p>Flag: <code class="inline-code">PCTF{Hunt3r5_4nD_g4tH3r3R5_e49e4a541}</code></p>
+            <h1 id="link-osint">🔗 OSINT</h1>
+            <h2 id="4-bad-documentation">4. Bad Documentation</h2>
+            <p>&quot;<em>I heard that this security researcher accidentally leaked his password in his documentation, but he deleted all the files in his repository so now we don't have access to it anymore! I'm pretty sure it's hopeless, but if you think you can find it here's the link to the repo: <a data-from-md title='https://github.com/Th3Burn1nat0r/vuln.' href='https://github.com/Th3Burn1nat0r/vuln.'>https://github.com/Th3Burn1nat0r/vuln.</a></em>&quot;</p>
+            <p>I cloned the repo and check for leaks in all the commit, one commit message stood out:</p>
+            <div class="joplin-editable">
+               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">commit 52552b52ac8ad993d150ff83a8e12bfeee6e74e6
+Author: Th3Burn1nat0r &lt;128736125+Th3Burn1nat0r@users.noreply.github.com&gt;
+Date:   Thu Mar 23 13:56:43 2023 -0400
+
+    Add files via upload
+</pre>
+               <pre class="hljs"><code><span class="hljs-attribute">commit</span> <span class="hljs-number">52552</span>b52ac8ad993d150ff83a8e12bfeee6e74e6
+<span class="hljs-attribute">Author</span>: Th3Burn1nat0r &lt;<span class="hljs-number">128736125</span>+Th3Burn1nat0r@users.noreply.github.com&gt;
+<span class="hljs-attribute">Date</span>:   Thu Mar <span class="hljs-number">23</span> <span class="hljs-number">13</span>:<span class="hljs-number">56</span>:<span class="hljs-number">43</span> <span class="hljs-number">2023</span> -<span class="hljs-number">0400</span>
+
+    <span class="hljs-attribute">Add</span> files via upload
+</code></pre>
+            </div>
+            <p>I reverted to that commit using the commands:</p>
+            <blockquote>
+               <p><code class="inline-code">git reset 52552b52ac8ad993d150ff83a8e12bfeee6e74e6</code></p>
+            </blockquote>
+            <p>The above command reverts back to place before commiting those files, which means the files must be staged right now.</p>
+            <p><code class="inline-code">git status</code>:</p>
+            <div class="joplin-editable">
+               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">Changes not staged for commit:
+  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+    deleted:    J-Link/JLE24007
+    deleted:    J-Link/JLE25006
+    deleted:    J-Link/JLE25006.png
+</pre>
+               <pre class="hljs"><code>Changes not staged for commit:
+  (use <span class="hljs-string">&quot;git add/rm &lt;file&gt;...&quot;</span> to update what will <span class="hljs-keyword">be </span>committed)
+  (use <span class="hljs-string">&quot;git restore &lt;file&gt;...&quot;</span> to <span class="hljs-keyword">discard </span>changes in working <span class="hljs-keyword">directory)
+</span><span class="hljs-symbol">    deleted:</span>    <span class="hljs-keyword">J-Link/JLE24007
+</span><span class="hljs-symbol">    deleted:</span>    <span class="hljs-keyword">J-Link/JLE25006
+</span><span class="hljs-symbol">    deleted:</span>    <span class="hljs-keyword">J-Link/JLE25006.png
+</span></code></pre>
+            </div>
+            <p>Now restore all the staged files using the command:<br>
+               <code class="inline-code">git restore *</code>
+            </p>
+            <p>we find a PNG Image J-Link/JLE25006.png, which looks like a burp screenshot</p>
+            <p><img src="/images/pctf_img1.png" alt="JLE25006.png"></p>
+            <p>Although we might not notice at first, we can see the authorization token as header in request, Read it using a OCR reader and Decode the base64 to get the flag.</p>
+            <h2 id="5-rogue-access-point">5. Rogue Access Point</h2>
+            <p><em>We've received a notice from our companies EDR software that a laptop was attacked while they were on WFH. The employee says they were at home when it happened, but we suspect they were using public wifi. Our EDR software managed to capture the BSSID of the wifi (46:D1:FA:63:BC:66) network before it got disconnected, but not the SSID. Can you still find the network they were connected to?</em></p>
+            <p>When it comes to SSID/BSSID and stuff, i use <a data-from-md title='wigle.net' href='wigle.net'>wigle.net</a><br>
+               Which is a Map of SSID around the world, and it has a feature to search by BSSID
+            </p>
+            <p>We have <strong>BSSID</strong>: 46:D1:FA:63:BC:66</p>
+            <p>I put in the BSSID and pressed filter, which pointed to a place near Washington, US,<br>
+               Now to get more information about the Tracked SSID, you need to Login.
+            </p>
+            <p>Zooming in, we find the BSSID belongs to Red table's free wifi. which is also the SSID.</p>
+            <p>Flag: <code class="inline-code">PCTF{Red's Table Free Wifi}</code></p>
+            <h1 id="bulb-misc">💡  MISC</h1>
+            <h2 id="6-uh-oh">6. Uh Oh!</h2>
+            <p><em>Uh Oh! While trying to add passwords to my wordlist, I accidentally added my own phone number! Can you tell me what line it's on?</em><br>
+               <em>For example (123) 456-7890</em>
+            </p>
+            <p><em>Flag format: PCTF{linenumber_phonenumonlynumbers}</em></p>
+            <p>We are provided with the Rockyou file, but this might contain the phone number somewhere. We can utilize the power of REGEX to solve this.</p>
+            <p>REGEX i used:<br>
+               <code class="inline-code">cat -n rockyou.txt | grep -P '\(\d{3}\) \d{3}-\d{4}'</code>
+            </p>
+            <p>where,<br>
+               <strong>-n</strong> = cat with line numbers<br>
+               <strong>-P</strong> = use PERL compaitable regex<br>
+               \d - matches digits<br>
+               {n} - matches n number of repetitions (fixed)
+            </p>
+            <p>Output:</p>
+            <div class="joplin-editable">
+               <pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash&#10;" data-joplin-source-close="&#10;```">└──╼ $cat -n rockyou.txt | grep -P '\(\d{3}\) \d{3}-\d{4}'
+7731484	(404) 303-7283</pre>
+               <pre class="hljs"><code>└──╼ <span class="hljs-variable">$cat</span> -n rockyou.txt | grep -P <span class="hljs-string">&#x27;\(\d{3}\) \d{3}-\d{4}&#x27;</span>
+7731484	(404) 303-7283</code></pre>
+            </div>
+            <p>FLAG: <code class="inline-code">PCTF{7731484_4043037283}</code></p>
+            <h1 id="nerd_face-trivia">🤓 Trivia</h1>
+            <h2 id="7-1972-schism">7. 1972 Schism</h2>
+            <p><em>Before George Mason University became its own college, GMU was a satellite school of what other commonwealth college?</em></p>
+            <p>A simple google search says &quot;University of Virgia&quot;, whose abbreviation is 'UVA'</p>
+            <p>FLAG: <code class="inline-code">PCTF{UVA}</code></p>
+            <h2 id="8-mascot-conundrum">8. Mascot Conundrum</h2>
+            <p><em>After GMU's brief foray into the Final Four, administration decided to change the school mascot to the modern day hat wearing, green and gold donned Patriot we know and love. However, before this GMU had several different mascots, one of which was particularly loved by students and facualty alike. What was the name of the masoct that preceded The Patriot?</em></p>
+            <p>A google search leads to the Webpage:<br>
+               <a data-from-md title='https://www.gmu.edu/news/2022-03/archives-history-mason-mascots' href='https://www.gmu.edu/news/2022-03/archives-history-mason-mascots'>https://www.gmu.edu/news/2022-03/archives-history-mason-mascots</a>
+            </p>
+            <p>Which leads to a youtube video of top 6 mascots in GMU history, If you watch the video you can find that its the Gunston that preceded the current mascot.</p>
+            <p>FLAG: <code class="inline-code">PCTF{Gunston}</code></p>
+            <h2 id="9-mason-id-osint">9. Mason ID OSINT</h2>
+            <p><em>Since 2010, all student ID's at GMU have featured a photo of one of the prominent buildings on campus. Can you figure out the individual for which the building featured on the Mason ID is named after? Your answer should be in the format PCTF{FirstName, LastName}</em></p>
+            <p>This one honestly took some searching for me. In a quick search we find the building is called Johnson Center located in Firefax campus. But who is Johnson though?</p>
+            <p>I reached out to ChatGPT who came up with a name 'Lywood Johnson', who probably never existed.</p>
+            <p>After some searching, found a link in GMU's website: <a data-from-md title='https://www.gmu.edu/news/2022-07/retro-mason-johnson-center-dedication-1996' href='https://www.gmu.edu/news/2022-07/retro-mason-johnson-center-dedication-1996'>https://www.gmu.edu/news/2022-07/retro-mason-johnson-center-dedication-1996</a></p>
+            <p>Flag: <code class="inline-code">PCTF{George, Johnson}</code></p>
+            <h1 id="takeaway">Takeaway</h1>
+            <p>As a self-proclaimed Jeopardy CTF noob, it was not satisfying that I couldn't solve more web and crypto challenges. But I guess I'm fine with the OSINTs. Now it's time to practice some PWN and CRYPTO before moving on to the next CTFs.</p>
+         </div>
+      </div>
+      </div>
+   </body>
+   <!-- footer section -->
+<footer class="footer">
+	<div class="content has-text-centered">
+		
+		<p class="brandlogo" style="font-size: 30px;color: gray;">RedTribe</p>
+		<div class="footer-links ">
+			<a class="button is-text"> MIT License </a>
+			<a class="button is-text"> Support</a>	
+		</div><br>
+		
+
+	</div>
+</footer>
+
+<script src="/static/js/    burgerToggle.js"></script>
+
+</html>
+

